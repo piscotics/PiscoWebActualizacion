@@ -1,0 +1,141 @@
+
+<ion-content class="content-padding dashboard dashboardContent contentTop" overflow-scroll="true">
+
+<html >
+    <div class="main-div">
+        
+      
+          <mat-card  class="form">
+           
+            <picture>
+                
+              <img mat-card-image src="./assets/img/Logo.jpg" alt="Photo of a Shiba Inu">
+            </picture>
+              <p>Confirma Tus Datos Personales</p>
+              <form class="example-form">
+                
+                
+                
+                <mat-form-field class="example-full-width">
+                    <mat-label>* Numero De Documento</mat-label>
+                    <textarea name="cedula" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero De Documento" maxlength="30"  [(ngModel)]="Cedula"  ></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Estado</mat-label>
+                    <input name="estado" matInput disabled [(ngModel)]="Estado"   >
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Primer Nombre</mat-label>
+                    <textarea class="mayuscula"  name="nombre1" matInput placeholder="Ingresa Tu Primer Nombre" maxlength="60" [(ngModel)]="Nombre1"  ></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Segundo Nombre</mat-label>
+                    <textarea class="mayuscula"  name="nombre2" matInput placeholder="Ingresa Tu Segundo Nombre"  maxlength="60" [(ngModel)]="Nombre2" ></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Primer Apellido</mat-label>
+                    <textarea class="mayuscula"  name="apellido1" matInput placeholder="Ingresa Tu Primer Apellido"  maxlength="60" [(ngModel)]="Apellido1"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Segundo Apellido</mat-label>
+                    <textarea class="mayuscula"  name="apellido2" matInput placeholder="Ingresa Tu Segundo Apellido"  maxlength="60" [(ngModel)]="Apellido2"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Dirección</mat-label>
+                    <textarea class="mayuscula"  name="direccion" matInput placeholder="Ingresa Tu Dirección" maxlength="150"  [(ngModel)]="Direccion"></textarea>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="fill" class="example-full-width">
+
+                    <mat-label>* Departamento</mat-label>
+                    <mat-select [(ngModel)]="Departamento" name="departamentos">
+                      <mat-option *ngFor="let departamentos of departamentosBd" [value]="departamentos.Dato" (click)="getAllCiudades(Departamento)"  >
+                        {{departamentos.Dato}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 
+                 
+                  <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>* Ciudad</mat-label>
+                  <mat-select [(ngModel)]="Ciudad" name="ciudades">
+                    <mat-option *ngFor="let ciudades of ciudadesBd" [value]="ciudades.Dato">
+                      {{ciudades.Dato}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+               
+             
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Barrio</mat-label>
+                    <textarea class="mayuscula"  name="barrio" matInput placeholder="Ingresa Tu Barrio"  maxlength="60" [(ngModel)]="Barrio"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Teléfono</mat-label>
+                    <textarea name="telefono" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero Télefono"   maxlength="30" [(ngModel)]="Telefono"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Celular</mat-label>
+                    <textarea name="celular" type="number" maxlength="10"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero De celular"   [(ngModel)]="Telefamiliar"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Email</mat-label>
+                    <textarea name="email" type="email" matInput [formControl]="emailFormControl"   maxlength="150" [errorStateMatcher]="matcher" 
+                           placeholder="Ejemplo@example.com"  [(ngModel)]="Email"></textarea>
+                  
+                    <mat-error *ngIf="emailFormControl.hasError('email')">
+                      Ingrese Un Email Valido 
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                      Email Es <strong>Requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field class="example-full-width">
+                    <mat-label>* Fecha Nacimiento</mat-label>
+                  <input name="fechanacimiento"  onkeydown="return false"  matInput [matDatepicker] ="myDatePicker" [max] ="maxDate" placeholder="Selecciona Tu Fecha De Nacimiento"  [(ngModel)]="FechaNacimientoDate"  >
+                  <mat-datepicker-toggle [for]="myDatePicker" matSuffix ></mat-datepicker-toggle>
+                <mat-datepicker #myDatePicker></mat-datepicker>  
+                </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea class="mayuscula"  name="detalle"  matInput placeholder="Ingresa Las Observaciones Que Consideras Respectivas"  maxlength="1000" [(ngModel)]="Detalle" ></textarea>
+                  </mat-form-field>
+                  
+                  
+                  <mat-slide-toggle   class="example-full-width"  (change)="toggleChangesTieneMascota($event)" *ngIf="mascota" >Tiene Mascota</mat-slide-toggle>
+                  <p></p>
+                  <p></p>
+
+                  <mat-slide-toggle class="example-full-width" (change)="toggleChangesTieneSeguroMascota($event)" *ngIf="seguro" >Tiene Seguro Mascota</mat-slide-toggle>
+                  
+                  <p></p>
+                  <p></p>
+                
+              </form>
+           
+           
+           <p></p>
+            <button mat-raised-button class="login-button" (click) = "SetTitular()" > 
+                <mat-icon>save</mat-icon> Enviar
+            </button>
+           
+         </mat-card>
+        
+      </div>
+
+     
+    
+      </html>
+</ion-content>

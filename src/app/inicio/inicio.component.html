@@ -1,0 +1,41 @@
+
+<html class="html">
+  <div class="main-div">
+      
+       
+        <mat-card  class="form">
+         
+          <picture>
+              
+              <img mat-card-image src="./assets/img/Logo.jpg" alt="Photo of a Shiba Inu">
+            </picture>
+            <p>Consulta Tu Información Y Realiza La Actualización...</p>
+            <form class="example-form">
+              
+              <mat-form-field class="example-full-width">
+                <mat-label>Numero De Documento</mat-label>
+                <textarea type="number"  (keypress)="onlyNumberKey($event)"  maxlength="30"  matInput placeholder="Ingresa Tu Numero De Documento Si Puntos"   [(ngModel)]="documento"></textarea>
+              </mat-form-field>
+            </form>
+
+          
+
+          <button mat-raised-button class="login-button" (click)="getConsultaCedula()" > 
+              <mat-icon>search</mat-icon> Consultar
+          </button>
+         <p></p>
+          <button mat-raised-button class="login-button" [routerLink]= "['/afiliarce']" > 
+              <mat-icon>create</mat-icon> Aún No Estoy Afiliado
+          </button>
+         <p></p>
+        
+         <a mat-button [routerLink]= "['/login']" >Iniciar Sesion</a>
+         
+
+          <p ></p>
+       </mat-card>
+      
+    </div>
+
+  
+    </html>

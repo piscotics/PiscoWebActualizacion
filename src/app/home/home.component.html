@@ -1,0 +1,375 @@
+
+<style>
+    :host {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 14px;
+      color: #333;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 8px 0;
+    }
+  
+    p {
+      margin: 0;
+    }
+  
+    .spacer {
+      flex: 1;
+    }
+  
+    .toolbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      background-color: #1976d2;
+      color: white;
+      font-weight: 600;
+    }
+  
+    .toolbar img {
+      margin: 0 16px;
+    }
+  
+    .toolbar #twitter-logo {
+      height: 40px;
+      margin: 0 16px;
+    }
+  
+    .toolbar #twitter-logo:hover {
+      opacity: 0.8;
+    }
+  
+    .content {
+      display: flex;
+      margin: 82px auto 32px;
+      padding: 0 16px;
+      max-width: 960px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    svg.material-icons {
+      height: 24px;
+      width: auto;
+    }
+  
+    svg.material-icons:not(:last-child) {
+      margin-right: 8px;
+    }
+  
+    .card svg.material-icons path {
+      fill: #888;
+    }
+  
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+  
+    .card {
+      border-radius: 4px;
+      border: 1px solid #eee;
+      background-color: #fafafa;
+      height: 40px;
+      width: 200px;
+      margin: 0 8px 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+      line-height: 24px;
+    }
+  
+    .card-container .card:not(:last-child) {
+      margin-right: 0;
+    }
+  
+    .card.card-small {
+      height: 16px;
+      width: 168px;
+    }
+  
+    .card-container .card:not(.highlight-card) {
+      cursor: pointer;
+    }
+  
+    .card-container .card:not(.highlight-card):hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    }
+  
+    .card-container .card:not(.highlight-card):hover .material-icons path {
+      fill: rgb(105, 103, 103);
+    }
+  
+    .card.highlight-card {
+      background-color: #1976d2;
+      color: white;
+      font-weight: 600;
+      border: none;
+      width: auto;
+      min-width: 30%;
+      position: relative;
+    }
+  
+    .card.card.highlight-card span {
+      margin-left: 60px;
+    }
+  
+    svg#rocket {
+      width: 80px;
+      position: absolute;
+      left: -10px;
+      top: -24px;
+    }
+  
+    svg#rocket-smoke {
+      height: calc(100vh - 95px);
+      position: absolute;
+      top: 10px;
+      right: 180px;
+      z-index: -10;
+    }
+  
+    a,
+    a:visited,
+    a:hover {
+      color: #1976d2;
+      text-decoration: none;
+    }
+  
+    a:hover {
+      color: #125699;
+    }
+  
+    .terminal {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 6px;
+      padding-top: 45px;
+      margin-top: 8px;
+      overflow: hidden;
+      background-color: rgb(15, 15, 16);
+    }
+  
+    .terminal::before {
+      content: "\2022 \2022 \2022";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: rgb(58, 58, 58);
+      color: #c2c3c4;
+      width: 100%;
+      font-size: 2rem;
+      line-height: 0;
+      padding: 14px 0;
+      text-indent: 4px;
+    }
+  
+    .terminal pre {
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+      color: white;
+      padding: 0 1rem 1rem;
+      margin: 0;
+    }
+  
+    .circle-link {
+      height: 40px;
+      width: 40px;
+      border-radius: 40px;
+      margin: 8px;
+      background-color: white;
+      border: 1px solid #eeeeee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: 1s ease-out;
+    }
+  
+    .circle-link:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    footer {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      line-height: 20px;
+    }
+  
+    footer a {
+      display: flex;
+      align-items: center;
+    }
+  
+    .github-star-badge {
+      color: #24292e;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      padding: 3px 10px;
+      border: 1px solid rgba(27,31,35,.2);
+      border-radius: 3px;
+      background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+      margin-left: 4px;
+      font-weight: 600;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    }
+  
+    .github-star-badge:hover {
+      background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
+      border-color: rgba(27,31,35,.35);
+      background-position: -.5em;
+    }
+  
+    .github-star-badge .material-icons {
+      height: 16px;
+      width: 16px;
+      margin-right: 4px;
+    }
+  
+    svg#clouds {
+      position: fixed;
+      bottom: -160px;
+      left: -230px;
+      z-index: -10;
+      width: 1920px;
+    }
+  
+  
+    /* Responsive Styles */
+    @media screen and (max-width: 767px) {
+  
+      .card-container > *:not(.circle-link) ,
+      .terminal {
+        width: 100%;
+      }
+  
+      .card:not(.highlight-card) {
+        height: 16px;
+        margin: 8px 0;
+      }
+  
+      .card.highlight-card span {
+        margin-left: 72px;
+      }
+  
+      svg#rocket-smoke {
+        right: 120px;
+        transform: rotate(-5deg);
+      }
+    }
+  
+    @media screen and (max-width: 575px) {
+      svg#rocket-smoke {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  </style>
+  
+  <div class="main-div">
+      
+       
+    <mat-card  class="form">
+  
+  <div class="content" role="main"  >
+  
+    <!-- Highlight Card -->
+    <div >
+  
+    
+  
+        <picture>
+              
+            <img mat-card-image src="./assets/img/Logo.jpg" alt="Photo of a Shiba Inu">
+          </picture>
+  
+    </div>
+  
+    <!-- Resources -->
+    <h3>Bienvenido {{nombreUsuario}}</h3>
+    <p>Elige La Operacion A Realizar</p>
+  
+    <div class="card-container">
+      <a class="card"  rel="noopener" [routerLink]= "['/actualizar-titular']" >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>  
+        <span>Actualizar Titular</span>
+  
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
+    </a>
+  
+      
+        <a class="card" rel="noopener" [routerLink]= "['/prospecto-titular']" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  width="24px" height="24px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>  
+            <span>Reportar Prospecto</span>
+            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </a>
+  
+      
+  
+    </div>
+
+    <div class="card-container" >
+        <a class="card"  rel="noopener"  [routerLink]= "['/reportes']" *ngIf="isShownReporte">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18h2V6H7v12zm4 4h2V2h-2v20zm-8-8h2v-4H3v4zm12 4h2V6h-2v12zm4-8v4h2v-4h-2z"/></svg>    
+          <span>Reportes</span>
+    
+          <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+    
+          <a class="card"  rel="noopener"  [routerLink]= "['/cambiar-clave']" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>    
+          <span>Cambiar Clave</span>
+    
+          <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+    
+       
+    
+      </div>
+
+      <div class="card-container" >
+        
+    
+          <a class="card"  rel="noopener"  [routerLink]= "['/login']">
+                      <span>Cerrar Sesion</span>
+    
+          <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
+    
+       
+    
+       
+    
+      </div>
+  
+   
+  
+  </div>
+
+</mat-card>
+
+      
+</div>
+  
+ 

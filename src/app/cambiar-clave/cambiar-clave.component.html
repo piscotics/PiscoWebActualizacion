@@ -1,0 +1,67 @@
+<ion-content class="content-padding dashboard dashboardContent contentTop" overflow-scroll="true">
+
+
+    <html >
+        <div class="main-div">
+            
+          
+              <mat-card  class="form">
+               
+                <picture>
+                    
+                  <img mat-card-image src="./assets/img/Logo.jpg" alt="Photo of a Shiba Inu">
+                </picture>
+                  <p>Cambiar Clave</p>
+                  <p><b>Nota:</b>La Clave Debe Tener Al Menos Una Mayúscula, Una Minúscula, Un Dígito Y Un Caracter Especial</p>
+                  <form class="example-form">
+                    
+                    
+    
+                    <mat-form-field class="example-full-width">
+                        <mat-label>* Clave Actual</mat-label>
+                        <input matInput type="password" name="passwordactual" placeholder="Contraseña Actual"  pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*[.!#$%&’*/=?^_`{|}~-].*"
+                        title="Debe tener al menos una mayúscula, una minúscula, un dígito y un caracter especial"  maxlength="20"  [(ngModel)]="passwordactual"/>
+                        <mat-error *ngIf="claveFormControl.hasError('required')">
+                            Verifique Que La Clave Cumpla Los Requisitos
+                          </mat-error>
+                      </mat-form-field>
+    
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Nueva Clave</mat-label>
+                        <input matInput type="password" name="passwordnuevo" placeholder="Contraseña Nueva"   pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*[.!#$%&’*/=?^_`{|}~-].*"
+                        title="Debe tener al menos una mayúscula, una minúscula, un dígito y un caracter especial" maxlength="20"  [(ngModel)]="passwordnuevo"/>
+                        <mat-error *ngIf="clavenuevaFormControl.hasError('required')">
+                            Verifique Que La Clave Cumpla Los Requisitos
+                          </mat-error>
+                      </mat-form-field>
+    
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Confirmar Clave</mat-label>
+                        <input matInput type="password" name="passwordconfirmacion" placeholder="Confrima Tu Contraseña"   pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*[.!#$%&’*/=?^_`{|}~-].*"
+                        title="Debe tener al menos una mayúscula, una minúscula, un dígito y un caracter especial" maxlength="20"  [(ngModel)]="passwordconfirmacion"/>
+                        <mat-error *ngIf="clavenuevaconfirmacionFormControl.hasError('required')">
+                            Verifique Que La Clave Cumpla Los Requisitos
+                          </mat-error>
+                      </mat-form-field>
+    
+                     
+                      <p></p>
+                      <p></p>
+    
+                    
+                  </form>
+               
+               
+               <p></p>
+                <button mat-raised-button class="login-button" (click) = "SetClave()" > 
+                    Guardar
+                </button>
+               
+             </mat-card>
+            
+          </div>
+    
+         
+        
+          </html>
+    </ion-content>
