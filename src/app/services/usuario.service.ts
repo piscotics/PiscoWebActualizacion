@@ -50,7 +50,7 @@ export class UsuarioService  {//implements CanActivate
     return this.http.get<UsuarioInterface>(path);    
 
   }
-
+ 
   getAllUsuario(){
     console.log('llego')
     const path = `${this.apiEndPoint}/Titulares/GetAllUsuario`;

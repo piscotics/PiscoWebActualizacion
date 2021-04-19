@@ -16,21 +16,12 @@ import { DialogsService } from '../services/dialogs.service';
 })
 export class LoginComponent implements OnInit {
   
-
-   
   usuario : string ="";
   password : string ="";
   public usuarioBd :any = [];
   encontroTitular: string ="";
   EstadoUsuario: number = 1;
-
-  
-
   public parentMessage : string;
-  
- 
-
- 
   public mensajeModal ="";
   NombreUsuario: string ="";
 

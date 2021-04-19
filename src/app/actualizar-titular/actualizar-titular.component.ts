@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TitularesService } from '../services/titulares.service';
 import { InicioComponent } from '../inicio/inicio.component';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDatosPersonalesComponent } from './../dialog-datos-personales/dialog-datos-personales.component';
 //import { DialogNoAfiliadoComponent } from '../dialog-no-afiliado/dialog-no-afiliado.component';
 import { UsuarioService } from '../services/usuario.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DOCUMENT } from '@angular/common';
 import { DialogActualizarDatosComponent } from '../dialog-actualizar-datos/dialog-actualizar-datos.component';
 import { DialogMensajesComponent } from '../dialog-mensajes/dialog-mensajes.component';
 import { DialogsService } from '../services/dialogs.service';
@@ -55,6 +55,14 @@ export class ActualizarTitularComponent implements OnInit {
   public ciudadesBd: any = [];
   public documentoTitular: string = '';
   public titleModalPersona: string = '';
+
+  public logoImage : string="";
+  public _nitCliente : string="";
+  public _dominioCliente : string="";
+  public encontroNit: string ="";
+  public dominioBd : any = [];
+  public dominioRuta : any = [];
+
   maxDate = new Date();
  // emailFormControl = new FormControl('', [Validators.email]);
   emailFormControl = new FormControl('',[Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),Validators.maxLength(100),
@@ -105,14 +113,57 @@ export class ActualizarTitularComponent implements OnInit {
     private usuarioService: UsuarioService,
     private modalService: DialogsService,
     private geolocalisacionServices: GeolocalizacionService,
-    private utilidadesService: UtilidadesService
+    private utilidadesService: UtilidadesService,
+    @Inject(DOCUMENT) document: any
   ) {
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
     //traemos el nomre del navegador
     this.navegador = this.utilidadesService.getBrowserName();
     console.log('el navegador es  ' + this.utilidadesService.getBrowserName());
+    this._dominioCliente = document.location.href
+       //trae el nit del cliente
+       //extraigo la ruta en un array
+       this.dominioRuta = this._dominioCliente.split("/");
+       console.log("la ruta es ");
+       console.log(this.dominioRuta[2] );
+       //asigno solo la ruta recortando el http y la pagina actual
+       this._dominioCliente = this.dominioRuta[2];
+       //envio la ruta recortando el puerto
+       this.nitCliente("funsanpedroweb.piscotics.com")// this._dominioCliente.replace(":9040","")
+
+      //traigo la url actual del usuario 
+      console.log('la url actual es  ' + document.location.href);
+
+      
   }
+
+    //trae el nit del cliente
+    nitCliente(_dominioCliente :string){
+
+      this.utilidadesService.getNitCliente(_dominioCliente).subscribe(dominio => {
+      
+        this.dominioBd = dominio;
+         
+        var userResult = this.dominioBd.slice(0);
+        //verifico si existe la cedula si no existe redirecciona a nuevo
+        this.encontroNit =  JSON.stringify(userResult[0].Estado).replace(/['"]+/g,'');  
+        //no encontro el usuario 
+        console.log('este es el estado '+this.encontroNit)
+        if (this.encontroNit =="Sin Datos"){
+         console.log("no se encontro dominio")
+        }else{
+  
+           //verifica si el usuario esta activo
+           this._nitCliente = JSON.stringify(userResult[0].Identificacion).replace(/['"]+/g,'');
+           console.log("el nit del cliente es "+ this._nitCliente  )
+           this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+        }
+    
+        });
+      
+  
+    }
 
   ngOnInit(): void {
     //trae las cordenadas

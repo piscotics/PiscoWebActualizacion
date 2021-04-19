@@ -22,22 +22,70 @@ export class InicioComponent implements OnInit {
 
   public documento : string = "";
   public currentItem : string ="televisor";
+  public logoImage : string="";
+  public _nitCliente : string="";
+  public _dominioCliente : string="";
+  public encontroNit: string ="";
+  public dominioBd : any = [];
+  public dominioRuta : any = [];
+
+  // src="./assets/img/Logo.jpg" 
   
   constructor( private router: Router,
     private titularesService : TitularesService,
     public dialog: MatDialog,
     private modalService : DialogsService,
     private utilidadesService : UtilidadesService,
+   
+
     @Inject(DOCUMENT) document: any) { 
+
+      this._dominioCliente = document.location.href
+       //trae el nit del cliente
+       //extraigo la ruta en un array
+       this.dominioRuta = this._dominioCliente.split("/");
+       console.log("la ruta es ");
+       console.log(this.dominioRuta[2] );
+       //asigno solo la ruta recortando el http y la pagina actual
+       this._dominioCliente = this.dominioRuta[2];
+       //envio la ruta recortando el puerto
+       this.nitCliente("funsanpedroweb.piscotics.com")// this._dominioCliente.replace(":9040","")
+
       //traigo la url actual del usuario 
       console.log('la url actual es  ' + document.location.href);
      
       console.log('el navegador es  ' +   this.utilidadesService.getBrowserName());
-
+     
 
     }
 
     
+    //trae el nit del cliente
+    nitCliente(_dominioCliente :string){
+
+      this.utilidadesService.getNitCliente(_dominioCliente).subscribe(dominio => {
+      
+        this.dominioBd = dominio;
+         
+        var userResult = this.dominioBd.slice(0);
+        //verifico si existe la cedula si no existe redirecciona a nuevo
+        this.encontroNit =  JSON.stringify(userResult[0].Estado).replace(/['"]+/g,'');  
+        //no encontro el usuario 
+        console.log('este es el estado '+this.encontroNit)
+        if (this.encontroNit =="Sin Datos"){
+         console.log("no se encontro dominio")
+        }else{
+
+           //verifica si el usuario esta activo
+           this._nitCliente = JSON.stringify(userResult[0].Identificacion).replace(/['"]+/g,'');
+           console.log("el nit del cliente es "+ this._nitCliente  )
+           this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+        }
+    
+        });
+      
+
+    }
 
 //permitir solo numeros
   onlyNumberKey(event: { charCode: number; }) {

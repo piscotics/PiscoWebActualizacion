@@ -1,11 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { ClienteInterface } from '../interfaces/cliente';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilidadesService {
 
-  constructor() { }
+
+
+ 
+  apiEndPoint:string="";
+  public logoImage : string="";
+  public _nitCliente : string="";
+  public _dominioCliente : string="";
+  public encontroNit: string ="";
+  public dominioBd : any = [];
+  public dominioRuta : any = [];
+  
+  constructor(private http : HttpClient) { 
+    this.apiEndPoint = environment.apiEndPoint;
+  }
 
 
   //traigo el nombre del navegado
@@ -28,6 +44,22 @@ export class UtilidadesService {
         return 'other';
     }
 }
+
+
+
+//trae el nit del cliente 
+
+getNitCliente(dominio : string){
+
+  const path = `${this.apiEndPoint}/Titulares/GetInformacionPrincipal?dominio=${dominio}`;
+  console.log(path);
+  return this.http.get<ClienteInterface>(path);    
+
+}
+
+
+ 
+
 
 
 }
