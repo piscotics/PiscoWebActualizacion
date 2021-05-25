@@ -15,6 +15,8 @@ import { ActualizarTitularComponent } from './actualizar-titular/actualizar-titu
 import { ProspectoTitularComponent } from './prospecto-titular/prospecto-titular.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
+import { ListBeneficiariosComponent } from './list-beneficiarios/list-beneficiarios.component';
+import { ActualizarBeneficiariosComponent } from './actualizar-beneficiarios/actualizar-beneficiarios.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'afiliarce', component: AfiliarceComponent},
   {path: 'inicio', component: InicioComponent},
   {path: 'datos-personales/:id', component: DatosPersonalesComponent},
+  {path: 'list-beneficiarios/:idTitular/:idContrato', component: ListBeneficiariosComponent},
+  {path: 'actualizar-beneficiarios/:idBeneficiario', component: ActualizarBeneficiariosComponent},
   
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
   {path: '404', component: InicioComponent},

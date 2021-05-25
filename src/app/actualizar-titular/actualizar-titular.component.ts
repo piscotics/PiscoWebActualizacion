@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { TitularesService } from '../services/titulares.service';
 import { InicioComponent } from '../inicio/inicio.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TitularInterface } from '../interfaces/titular';
 import {
   FormControl,
@@ -69,7 +69,7 @@ export class ActualizarTitularComponent implements OnInit {
   Validators.minLength(2)]);
 
   matcher = new MyErrorStateMatcher();
-
+  Contrato: string = '';
   Cedula: string = '';
   Nombre1: string = '';
   Nombre2: string = '';
@@ -114,6 +114,7 @@ export class ActualizarTitularComponent implements OnInit {
     private modalService: DialogsService,
     private geolocalisacionServices: GeolocalizacionService,
     private utilidadesService: UtilidadesService,
+    private router: Router,
     @Inject(DOCUMENT) document: any
   ) {
     //estable el color de fondo
@@ -165,6 +166,10 @@ export class ActualizarTitularComponent implements OnInit {
   
     }
 
+  SetBeneficiarios(){
+    this.router.navigate(['/list-beneficiarios', this.Cedula,this.Contrato]);
+  }
+
   ngOnInit(): void {
     //trae las cordenadas
     this.getLocation();
@@ -182,6 +187,7 @@ export class ActualizarTitularComponent implements OnInit {
   }
 
   limpiarDatos() {
+    this.Contrato='';
     this.Nombre1 = '';
     this.Nombre2 = '';
     this.Apellido1 = '';
@@ -282,6 +288,7 @@ export class ActualizarTitularComponent implements OnInit {
         //mostramos la modal
         this.openDialogMensajes();
       } else {
+        this.Contrato = JSON.stringify(titular[0].Contrato).replace(/['"]+/g, '');
         this.Cedula = JSON.stringify(titular[0].Cedula).replace(/['"]+/g, '');
         this.Estado = JSON.stringify(titular[0].Estado).replace(/['"]+/g, '');
         this.Nombre1 = JSON.stringify(titular[0].Nombre1).replace(/['"]+/g, '');
@@ -358,6 +365,7 @@ export class ActualizarTitularComponent implements OnInit {
     ) {
 
       const titulares = {
+        Contrato : this.Contrato,
         Cedula: this.Cedula,
         Nombre1: this.Nombre1,
         Nombre2: this.Nombre2,

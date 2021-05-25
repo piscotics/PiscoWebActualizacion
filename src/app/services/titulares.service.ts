@@ -12,9 +12,11 @@ import { map } from 'rxjs/operators';
 export class TitularesService {
 
   apiEndPoint:string="";
+  _rutaBd : any;
 
   constructor(private http : HttpClient) {
     this.apiEndPoint = environment.apiEndPoint;
+    this._rutaBd= localStorage.getItem("rutaBd");
    }
 
  // postUsuarioLogin(login : Login){
@@ -23,9 +25,9 @@ export class TitularesService {
  // }
 
   getTitular(cedula : string){
-    console.log('llego')
-    
-    const path = `${this.apiEndPoint}/Titulares/GetTitulares?Cedula=${cedula}`;
+  
+  
+    const path = `${this.apiEndPoint}/Titulares/GetTitulares?Cedula=${cedula}&rutaBd=${this._rutaBd}`;
     console.log(path);
     return this.http.get<TitularInterface>(path); 
     

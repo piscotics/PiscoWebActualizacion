@@ -24,6 +24,8 @@ export class InicioComponent implements OnInit {
   public currentItem : string ="televisor";
   public logoImage : string="";
   public _nitCliente : string="";
+  public _bdCliente : string="";
+  public _ipCliente : string="";
   public _dominioCliente : string="";
   public encontroNit: string ="";
   public dominioBd : any = [];
@@ -49,7 +51,7 @@ export class InicioComponent implements OnInit {
        //asigno solo la ruta recortando el http y la pagina actual
        this._dominioCliente = this.dominioRuta[2];
        //envio la ruta recortando el puerto
-       this.nitCliente("funsanpedroweb.piscotics.com")// this._dominioCliente.replace(":9040","")
+       this.consultarDatosCliente("obedweb.piscotics.com")// this._dominioCliente.replace(":9040","")
 
       //traigo la url actual del usuario 
       console.log('la url actual es  ' + document.location.href);
@@ -60,8 +62,8 @@ export class InicioComponent implements OnInit {
     }
 
     
-    //trae el nit del cliente
-    nitCliente(_dominioCliente :string){
+    //trae los datos del cliente
+   consultarDatosCliente(_dominioCliente :string){
 
       this.utilidadesService.getNitCliente(_dominioCliente).subscribe(dominio => {
       
@@ -78,7 +80,23 @@ export class InicioComponent implements OnInit {
 
            //verifica si el usuario esta activo
            this._nitCliente = JSON.stringify(userResult[0].Identificacion).replace(/['"]+/g,'');
+           this._bdCliente = JSON.stringify(userResult[0].RutaBd).replace(/['"]+/g,'');
+           this._ipCliente =  JSON.stringify(userResult[0].Ip).replace(/['"]+/g,'');
+
+           localStorage.removeItem("bdcliente")
+           localStorage.setItem("bdcliente", this._bdCliente)
+           
+           localStorage.removeItem("nitcliente")
+           localStorage.setItem("nitcliente", this._nitCliente)
+
+           localStorage.removeItem("ipcliente")
+           localStorage.setItem("ipcliente", this._ipCliente)
+
+           localStorage.removeItem("rutaBd")
+           localStorage.setItem("rutaBd", this._ipCliente +":"+ this._bdCliente)
+           
            console.log("el nit del cliente es "+ this._nitCliente  )
+
            this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
         }
     

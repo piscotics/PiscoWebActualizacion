@@ -66,7 +66,7 @@ export class DatosPersonalesComponent implements OnInit {
   Validators.minLength(2)]);
 
   matcher = new MyErrorStateMatcher();
-
+  Contrato: string = '';
   Cedula: string = '';
   Nombre1: string = '';
   Nombre2: string = '';
@@ -92,7 +92,9 @@ export class DatosPersonalesComponent implements OnInit {
   mascota : boolean =false;
   seguro : boolean =false;
   public logoImage : string="";
-  public _nitCliente : string="";
+  public _nitCliente : any;
+  public _bdCliente : any;
+  public _ipCliente : any;
   public _dominioCliente : string="";
   public encontroNit: string ="";
   public dominioBd : any = [];
@@ -112,19 +114,10 @@ export class DatosPersonalesComponent implements OnInit {
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
 
-      this._dominioCliente = document.location.href
-       //trae el nit del cliente
-       //extraigo la ruta en un array
-       this.dominioRuta = this._dominioCliente.split("/");
-       console.log("la ruta es ");
-       console.log(this.dominioRuta[2] );
-       //asigno solo la ruta recortando el http y la pagina actual
-       this._dominioCliente = this.dominioRuta[2];
-       //envio la ruta recortando el puerto
-       this.nitCliente("funsanpedroweb.piscotics.com")// this._dominioCliente.replace(":9040","")
-
-      //traigo la url actual del usuario 
-      console.log('la url actual es  ' + document.location.href);
+      
+      
+      this._nitCliente = localStorage.getItem("nitcliente");
+      this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
      
      
   }
@@ -144,32 +137,7 @@ export class DatosPersonalesComponent implements OnInit {
     this.getTitular(this.documentoTitular);
   }
   
-  //trae el nit del cliente
-  nitCliente(_dominioCliente :string){
-
-    this.utilidadesService.getNitCliente(_dominioCliente).subscribe(dominio => {
-    
-      this.dominioBd = dominio;
-       
-      var userResult = this.dominioBd.slice(0);
-      //verifico si existe la cedula si no existe redirecciona a nuevo
-      this.encontroNit =  JSON.stringify(userResult[0].Estado).replace(/['"]+/g,'');  
-      //no encontro el usuario 
-      console.log('este es el estado '+this.encontroNit)
-      if (this.encontroNit =="Sin Datos"){
-       console.log("no se encontro dominio")
-      }else{
-
-         //verifica si el usuario esta activo
-         this._nitCliente = JSON.stringify(userResult[0].Identificacion).replace(/['"]+/g,'');
-         console.log("el nit del cliente es "+ this._nitCliente  )
-         this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
-      }
-  
-      });
-    
-
-  }
+ 
   //se utiliza para traer la ubicacion
   getLocation() {
     this.geolocalisacionServices.getPosition().then((pos) => {
@@ -197,11 +165,8 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   getAllDepartamentos() {
-    this.departamentoService
-      .getAllDepartamentos()
-      .subscribe((departamentos) => {
+    this.departamentoService.getAllDepartamentos().subscribe((departamentos) => {
         this.departamentosBd = departamentos;
-
         console.log('los departa');
         console.log(departamentos);
       });
@@ -280,6 +245,7 @@ export class DatosPersonalesComponent implements OnInit {
       this.FechaNacimientoDate !== null
     ) {
       const titulares = {
+        Contrato : this.Contrato,
         Cedula: this.Cedula,
         Nombre1: this.Nombre1,
         Nombre2: this.Nombre2,

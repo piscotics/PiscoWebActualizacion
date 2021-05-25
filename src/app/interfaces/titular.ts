@@ -1,6 +1,6 @@
 export interface TitularInterface {
     
-
+     Contrato : string;
      Cedula : string;
      Nombre1 : string;
      Nombre2 : string;

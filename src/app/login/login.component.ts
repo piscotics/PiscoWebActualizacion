@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   public parentMessage : string;
   public mensajeModal ="";
   NombreUsuario: string ="";
-
+  public logoImage : string="";
+  public _nitCliente : any;
 
   constructor( private usuarioService : UsuarioService,
     public dialog: MatDialog,
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
       
      
     this.parentMessage ="message from parent";
+    this._nitCliente = localStorage.getItem("nitcliente");
+    this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+   
     }
 
   ngOnInit(): void {

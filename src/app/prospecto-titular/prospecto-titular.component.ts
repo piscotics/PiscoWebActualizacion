@@ -61,7 +61,7 @@ export class ProspectoTitularComponent implements OnInit {
   emailFormControl = new FormControl('',[Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),Validators.maxLength(100),
   Validators.minLength(2)]);
   matcher = new MyErrorStateMatcher();
-
+  Contrato: string = '';
   Cedula: string = '';
   Nombre1: string = '';
   Nombre2: string = '';
@@ -177,6 +177,7 @@ export class ProspectoTitularComponent implements OnInit {
       this.FechaNacimientoDate !== null
     ) {
       const titulares = {
+        Contrato : this.Contrato,
         Cedula: this.Cedula,
         Nombre1: this.Nombre1,
         Nombre2: this.Nombre2,

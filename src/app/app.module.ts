@@ -44,6 +44,10 @@ import { DialogActualizarDatosComponent } from './dialog-actualizar-datos/dialog
 import { IonicModule } from '@ionic/angular';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { CambiarClaveModule } from './cambiar-clave/cambiar-clave.module';
+import { ListBeneficiariosComponent } from './list-beneficiarios/list-beneficiarios.component';
+import { ActualizarBeneficiariosComponent } from './actualizar-beneficiarios/actualizar-beneficiarios.component';
+import { ListBeneficiariosModule } from './list-beneficiarios/list-beneficiarios.module';
+import { ActualizarBeneficiariosModule } from './actualizar-beneficiarios/actualizar-beneficiarios.module';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,9 @@ import { CambiarClaveModule } from './cambiar-clave/cambiar-clave.module';
     ProspectoTitularComponent,
     ReportesComponent,
     DialogActualizarDatosComponent,
-    CambiarClaveComponent
+    CambiarClaveComponent,
+    ListBeneficiariosComponent,
+    ActualizarBeneficiariosComponent
 
     
   ],
@@ -93,11 +99,13 @@ import { CambiarClaveModule } from './cambiar-clave/cambiar-clave.module';
     ActualizarTitularModule,
     ProspectoTitularModule,
     ReportesModule,
+    ListBeneficiariosModule,
+    ActualizarBeneficiariosModule,
     CambiarClaveModule,
     CommonModule,
     IonicModule.forRoot() ,
   ],
-  providers: [ReportesComponent, HttpClientModule,HttpClient,
+  providers: [ReportesComponent,ListBeneficiariosComponent,ActualizarBeneficiariosComponent, HttpClientModule,HttpClient,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent]
 })

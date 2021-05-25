@@ -67,7 +67,7 @@ export class AfiliarceComponent implements OnInit {
 
   mascota : boolean =false;
   seguro : boolean =false;
-
+  Contrato: string ='';
   Cedula: string = '';
   Nombre1: string = '';
   Nombre2: string = '';
@@ -90,7 +90,11 @@ export class AfiliarceComponent implements OnInit {
   Procesado: string = '0';
   latitude : string = '0';
   longitude : string = '0';
-
+  public logoImage : string="";
+  public _nitCliente : any;
+  public _bdCliente : any;
+  public _ipCliente : any;
+  
   constructor(
     private titularesService: TitularesService,
     private ciudadService: CiudadService,
@@ -105,6 +109,12 @@ export class AfiliarceComponent implements OnInit {
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
     console.log('el navegador es  ' +   this.utilidadesService.getBrowserName());
+    //trae los datos del cliente por medio del dominio ya guardado localmente
+    this._nitCliente = localStorage.getItem("nitcliente");
+    this._bdCliente = localStorage.getItem("bdcliente");
+    this._ipCliente= localStorage.getItem("ipcliente");
+    this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+     
   }
   //permitir solo numeros
   onlyNumberKey(event: { charCode: number }) {
@@ -174,6 +184,7 @@ export class AfiliarceComponent implements OnInit {
       this.FechaNacimientoDate !== null 
     ) {
       const titulares = {
+        Contrato: this.Contrato,
         Cedula: this.Cedula,
         Nombre1: this.Nombre1,
         Nombre2: this.Nombre2,

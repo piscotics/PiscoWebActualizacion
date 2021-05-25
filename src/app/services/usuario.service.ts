@@ -11,11 +11,12 @@ import { environment } from '../../environments/environment';
 export class UsuarioService  {//implements CanActivate
 
   apiEndPoint:string="";
-
+  _rutaBd : any;
   public usuarioBd :any = [];
 
   constructor(private http : HttpClient) { 
     this.apiEndPoint = environment.apiEndPoint;
+    this._rutaBd= localStorage.getItem("rutaBd");
   }
   
  // canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
@@ -45,7 +46,7 @@ export class UsuarioService  {//implements CanActivate
   getUsuario(usuario : string, password : string){
     console.log('llego')
     //http://localhost:4200/api/Titulares/GetUsuario?usuario=PISCO&passwordusuario=Pisco123*
-    const path = `${this.apiEndPoint}/Titulares/GetUsuario?usuario=${usuario}&passwordusuario=${password}`;
+    const path = `${this.apiEndPoint}/Titulares/GetUsuario?usuario=${usuario}&passwordusuario=${password}&rutaBd=${this._rutaBd}`;
     console.log(path);
     return this.http.get<UsuarioInterface>(path);    
 

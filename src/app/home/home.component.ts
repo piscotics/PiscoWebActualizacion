@@ -15,12 +15,15 @@ export class HomeComponent implements OnInit {
   public usuarioBd :any = [];
   nombreUsuario : string ="";
   rolUsuario : string ="";
- 
+  public logoImage : string="";
+  public _nitCliente : any;
  
   constructor( private usuarioService : UsuarioService,) { 
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
-    
+    this._nitCliente = localStorage.getItem("nitcliente");
+    this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+   
 
   }
   

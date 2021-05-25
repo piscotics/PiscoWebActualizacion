@@ -133,7 +133,12 @@
             <button mat-raised-button class="login-button" (click) = "SetTitular()"> 
                 <mat-icon>save</mat-icon> Enviar
             </button>
-           
+           <p>
+
+           </p>
+           <button *ngIf="Estado != '' " mat-raised-button class="login-button" (click) = "SetBeneficiarios()"> 
+            <mat-icon>people</mat-icon> Beneficiarios
+        </button>
          </mat-card>
         
       </div>

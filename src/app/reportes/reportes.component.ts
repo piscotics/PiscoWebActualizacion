@@ -26,7 +26,6 @@ export class ReportesComponent implements OnInit {
 
   public dataSource: any;
 
-  //displayedColumns: string[] = ['documento'];
   displayedColumns: string[] = [
     'documento',
     '1er Nombre',
