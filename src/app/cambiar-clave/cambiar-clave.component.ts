@@ -25,6 +25,8 @@ export class CambiarClaveComponent implements OnInit {
   rolUsuario : string ="";
   usuarioactual : string ="";
   claveactual : string ="";
+  public logoImage : string="";
+  public _nitCliente : any;
   
   claveFormControl = new FormControl('', [Validators.required,Validators.pattern(/(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*[.!#$%&’*/=?^_`{|}~-].*/),Validators.maxLength(20),
   Validators.minLength(5)]);
@@ -35,7 +37,12 @@ export class CambiarClaveComponent implements OnInit {
 
   constructor(private modalService: DialogsService,  public dialog: MatDialog,
     private cambioclaveService : CambioclaveService,
-    private usuarioService : UsuarioService) { }
+    private usuarioService : UsuarioService) { 
+
+      this._nitCliente = localStorage.getItem("nitcliente");
+      this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+
+    }
 
   ngOnInit(): void {
     this.usuarioBd =  this.usuarioService.getArray();

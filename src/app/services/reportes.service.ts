@@ -19,7 +19,7 @@ export class ReportesService {
  daystring : string ="";
  month : number = 0;
  monthstring : string = "";
-
+ _rutaBd : any;
  dayhasta : number =0;
  daystringhasta : string ="";
  monthhasta : number = 0;
@@ -27,6 +27,7 @@ export class ReportesService {
 
   constructor(private http : HttpClient) {
     this.apiEndPoint = environment.apiEndPoint;
+    this._rutaBd= localStorage.getItem("rutaBd");
    }
 
    getRegistros(fechadesde : any , fechahasta  : any, usuarioRegistro : any, estadoRegistro : any, procesadoRegistro : number, latitude :any, longitude : any ){
@@ -86,45 +87,43 @@ export class ReportesService {
         console.log('la fecha hasta opcion dos es ' + this.nuevaFechaHastaString)
 
     let path ="";
-    //http://sms.piscotics.com:9040/PiscoWebActualizacion/api/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro&estadoRegistro&procesadoRegistro=0
-    //http://sms.piscotics.com:9040/PiscoWebActualizacion/api/Titulares/GetAllActualizaciones?fechadesde&fechadesde&usuarioRegistro=null&estadoRegistro=null&procesadoRegistro=0
     if(isNaN(this.nuevaFechaDesde.getTime()) && isNaN(this.nuevaFechaHasta.getTime())  && usuarioRegistro == '' && estadoRegistro == ''){
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 1')
     }
     
     else if(!isNaN(this.nuevaFechaDesde.getTime()) && !isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro == '' && estadoRegistro == ''){      
     
      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 2')
     }
 
     else if(!isNaN(this.nuevaFechaDesde.getTime()) && !isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro !== '' && estadoRegistro == ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro=${usuarioRegistro}&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro=${usuarioRegistro}&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 3')
     }
 
     else if(!isNaN(this.nuevaFechaDesde.getTime()) && !isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro !== '' && estadoRegistro !== ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro=${usuarioRegistro}&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro=${usuarioRegistro}&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 4')
     }
 
     else if(!isNaN(this.nuevaFechaDesde.getTime()) && !isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro == '' && estadoRegistro !== ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde=${this.nuevaFechaDesdeString}&fechahasta=${this.nuevaFechaHastaString}&usuarioRegistro&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 5')
     }
 
     else if(isNaN(this.nuevaFechaDesde.getTime()) && isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro !== '' && estadoRegistro !== ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro=${usuarioRegistro}&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro=${usuarioRegistro}&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 6')
     }
     else if(isNaN(this.nuevaFechaDesde.getTime()) && isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro == '' && estadoRegistro !== ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro&estadoRegistro=${estadoRegistro}&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 7')
     }
     else if(isNaN(this.nuevaFechaDesde.getTime()) && isNaN(this.nuevaFechaHasta.getTime()) && usuarioRegistro !== '' && estadoRegistro == ''){      
-      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro=${usuarioRegistro}&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy`;
+      path = `${this.apiEndPoint}/Titulares/GetAllActualizaciones?fechadesde&fechahasta&usuarioRegistro=${usuarioRegistro}&estadoRegistro&procesadoRegistro=${procesadoRegistro}&posx&posy&rutaBd=${this._rutaBd}`;
       console.log('opcion 8')
     }
 
@@ -140,7 +139,7 @@ export class ReportesService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     console.log('llego' + confirmacionInterface)
-    const path = `${this.apiEndPoint}/Titulares/SetActualizarDatos`;
+    const path = `${this.apiEndPoint}/Titulares/SetActualizarDatos?rutaBd=${this._rutaBd}`;
     return this.http.post(path, confirmacionInterface);
   }
 }

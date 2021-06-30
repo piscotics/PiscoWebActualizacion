@@ -16,7 +16,7 @@ export class TitularesService {
 
   constructor(private http : HttpClient) {
     this.apiEndPoint = environment.apiEndPoint;
-    this._rutaBd= localStorage.getItem("rutaBd");
+   
    }
 
  // postUsuarioLogin(login : Login){
@@ -25,8 +25,8 @@ export class TitularesService {
  // }
 
   getTitular(cedula : string){
-  
-  
+    this._rutaBd= localStorage.getItem("rutaBd");
+  console.log("la ruta de la bd es: " + this._rutaBd)
     const path = `${this.apiEndPoint}/Titulares/GetTitulares?Cedula=${cedula}&rutaBd=${this._rutaBd}`;
     console.log(path);
     return this.http.get<TitularInterface>(path); 
@@ -35,10 +35,13 @@ export class TitularesService {
   }
 
   setTitular(titularInterface: TitularInterface) {
+    this._rutaBd= localStorage.getItem("rutaBd");
+      console.log("la ruta de la bd es: " + this._rutaBd)
+
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     console.log('llego' + titularInterface)
-    const path = `${this.apiEndPoint}/Titulares/SetTitulares`;
+    const path = `${this.apiEndPoint}/Titulares/SetTitulares?rutaBd=${this._rutaBd}`;
     return this.http.post(path, titularInterface);
   }
 

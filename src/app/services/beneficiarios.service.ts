@@ -9,14 +9,15 @@ import { BeneficiariosInterface } from '../interfaces/beneficiarios';
 export class BeneficiariosService {
   
   apiEndPoint:string="";
-
+  _rutaBd : any;
   constructor(private http : HttpClient) { 
     this.apiEndPoint = environment.apiEndPoint;
+    this._rutaBd= localStorage.getItem("rutaBd");
   }
 
   getBeneficiarios(documentoTitular: string, contratoTitular: string) {
     let path ="";
-    path = `${this.apiEndPoint}/Titulares/GetBeneficiarios?cedula=${documentoTitular}&contrato=${contratoTitular}`;
+    path = `${this.apiEndPoint}/Titulares/GetBeneficiarios?cedula=${documentoTitular}&contrato=${contratoTitular}&rutaBd=${this._rutaBd}`;
     console.log(path);
     return this.http.get<BeneficiariosInterface>(path); 
   }

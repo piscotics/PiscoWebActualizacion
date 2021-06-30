@@ -14,7 +14,9 @@ export class ListBeneficiariosComponent implements OnInit {
   public documentoTitular: string = '';
   public contratoTitular: string = '';
   public beneficiarioBd: any = [];
-
+  public logoImage : string="";
+  public _nitCliente : any;
+  
   displayedColumns: string[] = [
     'documento',
     '1er Nombre',
@@ -27,7 +29,10 @@ export class ListBeneficiariosComponent implements OnInit {
   ];
 
   constructor( private route: ActivatedRoute, private beneficiariosService: BeneficiariosService
-    , private router: Router,) { }
+    , private router: Router,) { 
+      this._nitCliente = localStorage.getItem("nitcliente");
+      this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+    }
 
   ngOnInit(): void {
 

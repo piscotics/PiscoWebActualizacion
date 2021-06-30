@@ -72,7 +72,9 @@ export class ReportesComponent implements OnInit {
   longitude : string = '';
   public isSlideCheckedProcesado: boolean = false;
   maxDate = new Date();
-
+  public logoImage : string="";
+  public _nitCliente : any;
+  
   constructor(
     private usuarioService: UsuarioService,
     private usuariologueadoService: UsuarioService,
@@ -80,6 +82,8 @@ export class ReportesComponent implements OnInit {
   ) {
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
+    this._nitCliente = localStorage.getItem("nitcliente");
+      this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
   }
 
   ngOnInit(): void {

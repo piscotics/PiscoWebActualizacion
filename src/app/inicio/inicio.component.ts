@@ -30,6 +30,7 @@ export class InicioComponent implements OnInit {
   public encontroNit: string ="";
   public dominioBd : any = [];
   public dominioRuta : any = [];
+  public _rutaBdPrincipal : string="";
 
   // src="./assets/img/Logo.jpg" 
   
@@ -51,7 +52,7 @@ export class InicioComponent implements OnInit {
        //asigno solo la ruta recortando el http y la pagina actual
        this._dominioCliente = this.dominioRuta[2];
        //envio la ruta recortando el puerto
-       this.consultarDatosCliente("obedweb.piscotics.com")// this._dominioCliente.replace(":9040","")
+       this.consultarDatosCliente("funsanpedroweb.piscotics.com")//this._dominioCliente.replace(":9040","") obedweb.piscotics.com funsanpedroweb.piscotics.com obedweb.piscotics.com this._dominioCliente.replace(":9040","")
 
       //traigo la url actual del usuario 
       console.log('la url actual es  ' + document.location.href);
@@ -82,6 +83,7 @@ export class InicioComponent implements OnInit {
            this._nitCliente = JSON.stringify(userResult[0].Identificacion).replace(/['"]+/g,'');
            this._bdCliente = JSON.stringify(userResult[0].RutaBd).replace(/['"]+/g,'');
            this._ipCliente =  JSON.stringify(userResult[0].Ip).replace(/['"]+/g,'');
+           this._rutaBdPrincipal  =  JSON.stringify(userResult[0].RutaBdPrincipal).replace(/['"]+/g,'');
 
            localStorage.removeItem("bdcliente")
            localStorage.setItem("bdcliente", this._bdCliente)
@@ -93,9 +95,9 @@ export class InicioComponent implements OnInit {
            localStorage.setItem("ipcliente", this._ipCliente)
 
            localStorage.removeItem("rutaBd")
-           localStorage.setItem("rutaBd", this._ipCliente +":"+ this._bdCliente)
+           localStorage.setItem("rutaBd", this._rutaBdPrincipal)
            
-           console.log("el nit del cliente es "+ this._nitCliente  )
+           console.log("el nit del cliente es "+ this._nitCliente + " y la ruta de la bede es "+ this._rutaBdPrincipal  )
 
            this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
         }

@@ -54,7 +54,7 @@ export class UsuarioService  {//implements CanActivate
  
   getAllUsuario(){
     console.log('llego')
-    const path = `${this.apiEndPoint}/Titulares/GetAllUsuario`;
+    const path = `${this.apiEndPoint}/Titulares/GetAllUsuario?rutaBd=${this._rutaBd}`;
     console.log(path);
     return this.http.get<UsuarioInterface>(path);    
 

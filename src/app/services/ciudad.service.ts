@@ -9,19 +9,21 @@ import { environment } from '../../environments/environment';
 export class CiudadService {
 
   apiEndPoint:string="";
+  _rutaBd : any;
   constructor(private http : HttpClient) { 
 
     this.apiEndPoint = environment.apiEndPoint;
+    this._rutaBd= localStorage.getItem("rutaBd");
   }
 
   //traer ciudades
   //
   getAllCiudad(ciudad : string) {
     
-    const path = `${this.apiEndPoint}/Titulares/GetUbicacion?Dato=Ciudad&Departamento=${ciudad}`;
+    const path = `${this.apiEndPoint}/Titulares/GetUbicacion?Dato=Ciudad&Departamento=${ciudad}&rutaBd=${this._rutaBd}`;
     console.log(path)
     return this.http.get<CiudadInterface[]>(path);
   }
  
-
+ 
 }
