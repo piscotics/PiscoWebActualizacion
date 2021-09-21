@@ -17,6 +17,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { ListBeneficiariosComponent } from './list-beneficiarios/list-beneficiarios.component';
 import { ActualizarBeneficiariosComponent } from './actualizar-beneficiarios/actualizar-beneficiarios.component';
+import { AliadoComponent } from './aliado/aliado.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'afiliarce', component: AfiliarceComponent},
+  {path: 'aliado', component: AliadoComponent},
   {path: 'inicio', component: InicioComponent},
   {path: 'datos-personales/:id', component: DatosPersonalesComponent},
   {path: 'list-beneficiarios/:idTitular/:idContrato', component: ListBeneficiariosComponent},
@@ -38,6 +40,7 @@ const routes: Routes = [
   {path: '404', component: InicioComponent},
   {path: '**', redirectTo: '/404'}
   
+
 
 ];
 

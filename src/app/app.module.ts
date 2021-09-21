@@ -48,6 +48,7 @@ import { ListBeneficiariosComponent } from './list-beneficiarios/list-beneficiar
 import { ActualizarBeneficiariosComponent } from './actualizar-beneficiarios/actualizar-beneficiarios.component';
 import { ListBeneficiariosModule } from './list-beneficiarios/list-beneficiarios.module';
 import { ActualizarBeneficiariosModule } from './actualizar-beneficiarios/actualizar-beneficiarios.module';
+import { AliadoComponent } from './aliado/aliado.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ActualizarBeneficiariosModule } from './actualizar-beneficiarios/actual
     DialogActualizarDatosComponent,
     CambiarClaveComponent,
     ListBeneficiariosComponent,
-    ActualizarBeneficiariosComponent
+    ActualizarBeneficiariosComponent,
+    AliadoComponent
 
     
   ],
