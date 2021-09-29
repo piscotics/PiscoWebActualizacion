@@ -90,7 +90,7 @@ export class ProspectoTitularComponent implements OnInit {
   seguro : boolean =false;
   public logoImage : string="";
   public _nitCliente : any;
-  
+   
   constructor(
     private titularesService: TitularesService,
     private ciudadService: CiudadService,
@@ -110,7 +110,8 @@ export class ProspectoTitularComponent implements OnInit {
   ngOnInit(): void {
      //trae las cordenadas 
      this.getLocation();
-    
+     //lista los departamentos
+     this.getAllDepartamentos();
     //trae el nombre del usuario
     this.usuarioBd = this.usuarioService.getArray();
     var userResult = this.usuarioBd.slice(0);
@@ -120,6 +121,31 @@ export class ProspectoTitularComponent implements OnInit {
     );
     this.Usuario = JSON.stringify(userResult[0].Username).replace(/['"]+/g, '');
   }
+
+  limpiarDatos() {
+    this.Contrato='';
+    this.Nombre1 = '';
+    this.Nombre2 = '';
+    this.Apellido1 = '';
+    this.Apellido2 = '';
+    this.Direccion = '';
+    this.Departamento = '';
+    this.Ciudad = '';
+    this.Barrio = '';
+    this.Telefono = '';
+    this.Telefamiliar = '';
+    this.Email = '';
+    this.FechaNacimiento = '';
+    this.FechaNacimientoDate = new Date();
+    this.Estado = '';
+    this.TieneMascota = '0';
+    this.TieneSeguro = '0';
+    this.Detalle = '';
+    this.Procesado = '1';
+    this.mascota = false;
+    this.seguro = false;
+  }
+
 
   //se utiliza para traer la ubicacion
   getLocation() {
@@ -159,6 +185,8 @@ export class ProspectoTitularComponent implements OnInit {
       console.log(ciudades);
     });
   }
+
+
   openDialogMensajes() {
     this.dialog.open(DialogMensajesComponent);
   }

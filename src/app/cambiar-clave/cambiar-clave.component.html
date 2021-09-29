@@ -9,21 +9,20 @@
                
                 <picture>
                     
-                  <img style="width: 230px; height: 100px;  object-fit: fill;" [src]="logoImage"  alt="">
+
+                  <img style="width: 230px; height: 100px;  object-fit: contain;" [src]="logoImage" alt="">
                 </picture>
                   <p>Cambiar Clave</p>
-                  <p><b>Nota:</b>La Clave Debe Tener Al Menos Una Mayúscula, Una Minúscula, Un Dígito Y Un Caracter Especial</p>
+                  <p><b>Nota:</b>La Clave Debe Tener Al Menos Una Mayúscula,<br> Una Minúscula, Un Dígito Y Un Caracter Especial</p>
                   <form class="example-form">
                     
                     
     
                     <mat-form-field class="example-full-width">
                         <mat-label>* Clave Actual</mat-label>
-                        <input matInput type="password" name="passwordactual" placeholder="Contraseña Actual"  pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*[.!#$%&’*/=?^_`{|}~-].*"
-                        title="Debe tener al menos una mayúscula, una minúscula, un dígito y un caracter especial"  maxlength="20"  [(ngModel)]="passwordactual"/>
-                        <mat-error *ngIf="claveFormControl.hasError('required')">
-                            Verifique Que La Clave Cumpla Los Requisitos
-                          </mat-error>
+                        <input matInput type="password" name="passwordactual" placeholder="Contraseña Actual"  
+                        maxlength="20"  [(ngModel)]="passwordactual"/>
+                       
                       </mat-form-field>
     
                       <mat-form-field class="example-full-width">

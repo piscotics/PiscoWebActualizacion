@@ -79,7 +79,7 @@ export class AliadoComponent implements OnInit {
   Telefono: string = '';
   Telefamiliar: string = '';
   Email: string = '';
-  Categoria: string = '';
+  Categoria: string = 'Participante';
   Procesado: string = '0';
   latitude : string = '0';
   longitude : string = '0';
@@ -207,6 +207,7 @@ export class AliadoComponent implements OnInit {
         //muestra modal que se almaceno correctamente
         if (this.resultTitular == 'Informacion Almacenada Correctamente') {
           this.openDialogDatosAlmacendos();
+          this.limpiarDatos();
         }
 
         console.log(this.resultTitular);
@@ -224,6 +225,25 @@ export class AliadoComponent implements OnInit {
     }
   }
 
-  
+  limpiarDatos() {
+    this.Cedula = '';
+    this.Nombre1= '';
+    this.Nombre2 = '';
+    this.Apellido1= '';
+    this.Apellido2 = '';
+    this.Direccion = '';
+    this.Departamento = '';
+    this.Ciudad = '';
+    this.Barrio = '';
+    this.Telefono= '';
+    this.Telefamiliar = '';
+    this.Email= '';
+    this.Categoria = 'Participante';
+    this.Procesado = '0';
+    this.latitude  = '0';
+    this.longitude  = '0';
+  }
 
 }
+
+

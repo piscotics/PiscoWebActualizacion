@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogActualizarDatosComponent } from '../dialog-actualizar-datos/dialog-actualizar-datos.component';
 import { DialogMensajesComponent } from '../dialog-mensajes/dialog-mensajes.component';
 import { CambioclaveService } from '../services/cambioclave.service';
@@ -37,7 +38,8 @@ export class CambiarClaveComponent implements OnInit {
 
   constructor(private modalService: DialogsService,  public dialog: MatDialog,
     private cambioclaveService : CambioclaveService,
-    private usuarioService : UsuarioService) { 
+    private usuarioService : UsuarioService,
+    private router: Router,) { 
 
       this._nitCliente = localStorage.getItem("nitcliente");
       this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
@@ -88,7 +90,10 @@ export class CambiarClaveComponent implements OnInit {
 
         //muestra modal que se almaceno correctamente
         if (this.resultClave == 'Clave Actualizada Correctamente') {
-          this.openDialogDatosAlmacendos();
+         // this.openDialogDatosAlmacendos();
+          this.router.navigate(['/inicio']);
+          
+         
         }
 
         console.log(this.resultClave);

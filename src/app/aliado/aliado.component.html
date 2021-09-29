@@ -97,16 +97,12 @@
                       </mat-error>
                     </mat-form-field>
                     
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Categoria</mat-label>
+                      <input name="categoria" matInput disabled [(ngModel)]="Categoria"   >
+                    </mat-form-field>
+
                    
-                    <mat-form-field appearance="fill" class="example-full-width">
-  
-                        <mat-label>* Categoria</mat-label>
-                        <mat-select [(ngModel)]="Categoria" name="categorias">
-                          <mat-option>Participante</mat-option>
-                          <mat-option>Activo</mat-option>
-                          <mat-option>Inactivo</mat-option>
-                        </mat-select>
-                      </mat-form-field>
                  
   
                   

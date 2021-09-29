@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
@@ -12,13 +13,17 @@ export class HomeComponent implements OnInit {
 
 
   public isShownReporte: boolean = false;
+  public isShownActualizarTitular: boolean = false;
   public usuarioBd :any = [];
   nombreUsuario : string ="";
   rolUsuario : string ="";
+  cargoUsuario : string ="";
+  configuracion : string ="";
   public logoImage : string="";
   public _nitCliente : any;
  
-  constructor( private usuarioService : UsuarioService,) { 
+  constructor( private usuarioService : UsuarioService,
+    private router: Router,) { 
     //estable el color de fondo
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
     this._nitCliente = localStorage.getItem("nitcliente");
@@ -34,11 +39,24 @@ export class HomeComponent implements OnInit {
     console.log("llego el array "+JSON.stringify(userResult[0].Nombres).replace(/['"]+/g,'')  );
     this.nombreUsuario =JSON.stringify(userResult[0].Nombres).replace(/['"]+/g,'');
     this.rolUsuario =JSON.stringify(userResult[0].Dbrol).replace(/['"]+/g,'');
-    console.log('el rol del usuario es  ' + this.rolUsuario)
-    if(this.rolUsuario =="ADMINISTRADOR"){
+    this.cargoUsuario =JSON.stringify(userResult[0].Cargo).replace(/['"]+/g,'');
+    this.configuracion =JSON.stringify(userResult[0].Configuracion).replace(/['"]+/g,'');
+    
+    console.log('la configuracion del usuario es  ' + this.configuracion)
+    if(this.rolUsuario =="ADMINISTRADOR" || (this.rolUsuario =="INSERTAR" &&  this.cargoUsuario =="Aliado")){
       this.isShownReporte = true;
     }else{
       this.isShownReporte = false;
+    }
+
+    if( this.cargoUsuario =="Aliado"){
+      this.isShownActualizarTitular = false;
+    }else{
+      this.isShownActualizarTitular = true;
+    }
+
+    if(this.configuracion == "1"){
+      this.router.navigate(['/cambiar-clave']);
     }
     //this.nombreUsuario =  JSON.stringify(usuarioBd[0].Cedula).replace(/['"]+/g,'');
   }

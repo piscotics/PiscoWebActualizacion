@@ -338,7 +338,7 @@
             <mat-datepicker #myDatePickerHasta></mat-datepicker>  
             </mat-form-field>
        
-            <mat-form-field appearance="fill" class="example-full-width">
+            <mat-form-field appearance="fill" class="example-full-width" *ngIf="isShownUsuario">
                 <mat-label>Usuario</mat-label>
                 <mat-select [(ngModel)]="Usuario" name="Estado">
                   <mat-option value="">Seleccionar</mat-option>

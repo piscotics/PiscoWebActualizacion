@@ -23,7 +23,7 @@ const now = Date();
 export class ReportesComponent implements OnInit {
   public usuarioBd: any = [];
   public usuariologueadoBd: any = [];
-
+  public isShownUsuario: boolean = false;
   public dataSource: any;
 
   displayedColumns: string[] = [
@@ -60,7 +60,7 @@ export class ReportesComponent implements OnInit {
   public reportesBd: any = [];
 
   UsuarioLogueado: string = '';
-
+  idUsuario : string="";
   FechaDesde: string = '';
   FechaHasta: string = '';
   Usuario: string = '';
@@ -74,7 +74,7 @@ export class ReportesComponent implements OnInit {
   maxDate = new Date();
   public logoImage : string="";
   public _nitCliente : any;
-  
+  cargoUsuario : string ="";
   constructor(
     private usuarioService: UsuarioService,
     private usuariologueadoService: UsuarioService,
@@ -98,13 +98,28 @@ export class ReportesComponent implements OnInit {
       /['"]+/g,
       ''
     );
+    this.cargoUsuario =JSON.stringify(userResult[0].Cargo).replace(/['"]+/g,'');
 
+    this.idUsuario =JSON.stringify(userResult[0].Username).replace(/['"]+/g,'');
+    
+    
+
+    console.log('el cargo del usuario es  ' + this.idUsuario)
     //trae los  usuarios para listarlos
-    this.usuarioService.getAllUsuario().subscribe((usuarios) => {
-      this.usuarioBd = usuarios;
-      console.log('los user so ')
-      console.log( this.usuarioBd)
-    });
+       this.usuarioService.getAllUsuario().subscribe((usuarios) => {
+        this.usuarioBd = usuarios;
+        console.log('los user so ')
+        console.log( this.usuarioBd)
+      });
+
+    if( this.cargoUsuario =="Aliado"){
+      this.isShownUsuario =false;
+       this.Usuario =  this.idUsuario;
+       console.log("el usuario logueado es", this.idUsuario);
+    }else{
+      this.isShownUsuario =true;
+    }
+   
 
     //busca los registros del dia actual
     this.buscarRegistros();
