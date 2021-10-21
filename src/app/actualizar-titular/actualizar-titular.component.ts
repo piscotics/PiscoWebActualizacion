@@ -321,11 +321,11 @@ export class ActualizarTitularComponent implements OnInit {
       this.Cedula !== '' &&
       this.Nombre1 !== '' &&
       this.Apellido1 !== '' &&
-      this.Direccion !== '' &&
+      
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
       this.Telefamiliar !== '' &&
-      (this.Email == 'NA' || this.emailFormControl.status == "VALID" ) &&
+      
       this.FechaNacimientoDate !== null
     ) {
 

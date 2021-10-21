@@ -1,48 +1,70 @@
-<html class="html">
-  <div class="main-div">
-      
-       
-        <mat-card  class="form">
-         
-          <picture>
-              
-              <img style="width: 230px; height: 100px;  object-fit: contain;" mat-card-image [src]="logoImage"  alt="">
-            </picture>
-            <p>Inicia Sesion Para Gestionar Los Registros</p>
-            <form class="example-form">
-              
-             
+<html>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <picture  class="login100-form-title">
+          <img mat-card-image [src]="logoImage" alt="" />
+        </picture>
+<div class="card">
+  
+        <form class="login100-form validate-form">
 
-              <mat-form-field class="example-full-width">
-                <mat-label>Usuario</mat-label>
-                <input matInput type="text" name="usuario" placeholder="Ingresa Tu Usuario"   [(ngModel)]="usuario"/>
-
-              
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-               
-                <mat-label>Contraseña</mat-label>
-                <input matInput type="password" name="password" placeholder="Ingresa Tu Contraseña"   [(ngModel)]="password"/>
-
-              
-              </mat-form-field>
-
-            </form>
-
-           
-
-          <button mat-raised-button class="login-button"  (click)="getUsuario()" > 
-              <mat-icon>people</mat-icon> Iniciar Sesion
-          </button>
-         <p></p>
           
+          <div
+            class="wrap-input100 validate-input m-b-26"
+            data-validate="Username is required"
+          >
+            <span class="label-input100"> <mat-label>Usuario</mat-label> </span
+            >&nbsp;
+            <input
+              class="input100"
+              matInput
+              type="text"
+              name="usuario"
+              placeholder="Ingresa Tu Usuario"
+              [(ngModel)]="usuario"
+            />
 
-       </mat-card>
+            <span class="focus-input100"></span>
+          </div>
 
-      
-        </div>
-       
-       
-    </html>
+          <div
+            class="wrap-input100 validate-input m-b-18"
+            data-validate="Password is required"
+          >
+            <span class="label-input100">
+              <mat-label>Contraseña</mat-label> </span
+            >&nbsp;
+            <input
+              class="input100"
+              matInput
+              type="password"
+              name="password"
+              placeholder="Ingresa Tu Contraseña"
+              [(ngModel)]="password"
+            />
 
-    
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="flex-sb-m w-full p-b-30">
+            <br />
+            <br />
+
+            <button
+              mat-raised-button
+              class="login100-form-btn"
+              (click)="getUsuario()"
+            >
+              <mat-icon>people</mat-icon> Iniciar Sesion
+            </button>
+          </div>
+         
+        </form> </div>
+        <picture>
+          <img mat-card-image [src]="logoImagei" alt="" />
+        </picture>
+      </div>
+    </div>
+  </div>
+</html>

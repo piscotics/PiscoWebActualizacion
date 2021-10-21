@@ -55,9 +55,10 @@ export class HomeComponent implements OnInit {
       this.isShownActualizarTitular = true;
     }
 
-    if(this.configuracion == "1"){
-      this.router.navigate(['/cambiar-clave']);
-    }
+    //se comenta ya que se estan actuaizando datos que no son 
+   // if(this.configuracion == "1"){
+     // this.router.navigate(['/cambiar-clave']);
+   // }
     //this.nombreUsuario =  JSON.stringify(usuarioBd[0].Cedula).replace(/['"]+/g,'');
   }
 
