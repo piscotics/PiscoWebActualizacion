@@ -79,7 +79,7 @@ export class AliadoComponent implements OnInit {
   Telefono: string = '';
   Telefamiliar: string = '';
   Email: string = '';
-  Categoria: string = 'Participante';
+  Categoria: string = 'Inactivo';
   Procesado: string = '0';
   latitude : string = '0';
   longitude : string = '0';

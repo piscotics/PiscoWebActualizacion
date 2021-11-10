@@ -50,6 +50,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class ProspectoTitularComponent implements OnInit {
   public isSlideCheckedTieneMascota: boolean = false;
   public isSlideCheckedTieneSeguroM: boolean = false;
+  public isSlideCheckedTienePlanExequial: boolean = false;
   public titularBd: any = [];
   public resultTitularBd: any = [];
   public departamentosBd: any = [];
@@ -79,6 +80,7 @@ export class ProspectoTitularComponent implements OnInit {
   Estado: string = 'PROSPECTO';
   TieneMascota: string = '0';
   TieneSeguro: string = '0';
+  TienePlanExequial: string = '0';
   Detalle: string = '';
   Usuario: string = '';
   latitude : string = '0';
@@ -88,8 +90,11 @@ export class ProspectoTitularComponent implements OnInit {
   nombreUsuario: string = '';
   mascota : boolean =false;
   seguro : boolean =false;
+  planexequial : boolean =false;
   public logoImage : string="";
   public _nitCliente : any;
+  public registrarprospecto :boolean =false;
+  EntidadPlanExequial : string ="";
    
   constructor(
     private titularesService: TitularesService,
@@ -140,10 +145,12 @@ export class ProspectoTitularComponent implements OnInit {
     this.Estado = '';
     this.TieneMascota = '0';
     this.TieneSeguro = '0';
+    this.TienePlanExequial ='0';
     this.Detalle = '';
     this.Procesado = '1';
     this.mascota = false;
     this.seguro = false;
+    this.planexequial = false;
   }
 
 
@@ -196,7 +203,43 @@ export class ProspectoTitularComponent implements OnInit {
     this.modalService.setMensaje(mensaje, titulo);
   }
 
+  //trae los datos del titular para mostrarlos en los campos utilizando ngmodel
+  getTitular(document: string) {
+    this.registrarprospecto = true;
+    console.log('buscar' + document);
+    this.titularesService.getTitular(document).subscribe((titulares) => {
+      this.titularBd = titulares;
+
+      console.log('aqui muestra los titulares ');
+      console.log(titulares);
+
+      var titular = this.titularBd.slice(0);
+      //verifico si existe la cedula si no existe redirecciona a nuevo
+      this.encontroTitular = JSON.stringify(titular[0].Estado).replace(
+        /['"]+/g,
+        ''
+      );
+
+      if (this.encontroTitular == 'ACTIVO') {
+        this.sendModalMensage("No Se Puede Registrar La Informacion, Ya Existe","Ya Existe")
+      } else if (this.encontroTitular == 'RETIRADO')  {
+        this.sendModalMensage("La Informacion Ya Existe Con Estado Retirado","Ya Existe")
+        this.guardarProspecto();
+      }else{
+        this.guardarProspecto();
+      }
+    });
+  }
+
+
   SetTitular() {
+    //consulta la cedula al momento de almacenar 
+    this.getTitular(this.Cedula);
+    
+  }
+
+  guardarProspecto(){
+    //valida los datoa para almacenar 
     if (
       this.Cedula !== '' &&
       this.Nombre1 !== '' &&
@@ -206,7 +249,7 @@ export class ProspectoTitularComponent implements OnInit {
       this.Ciudad !== '' &&
       this.Telefamiliar !== '' &&
       (this.Email == 'NA' || this.emailFormControl.status == "VALID" ) &&
-      this.FechaNacimientoDate !== null
+      this.FechaNacimientoDate !== null 
     ) {
       const titulares = {
         Contrato : this.Contrato,
@@ -230,7 +273,9 @@ export class ProspectoTitularComponent implements OnInit {
         Usuario: this.Usuario,
         Procesado: this.Procesado,
         POSX : this.latitude,
-        POSY : this.longitude
+        POSY : this.longitude,
+        TienePlanExequial : this.TienePlanExequial,
+        EntidadPlanExequial :  this.EntidadPlanExequial
       };
       console.log('enviara' + JSON.stringify(titulares));
       this.titularesService.setTitular(titulares).subscribe((newTitular) => {
@@ -257,6 +302,7 @@ export class ProspectoTitularComponent implements OnInit {
       //mostramos la modal
       this.openDialogMensajes();
     }
+
   }
 
   toggleChangesTieneMascota($event: MatSlideToggleChange) {
@@ -278,6 +324,17 @@ export class ProspectoTitularComponent implements OnInit {
     } else {
       console.log('seguro mascota ' + this.isSlideCheckedTieneSeguroM);
       this.TieneSeguro = '0';
+    }
+  }
+
+  toggleChangesTienePlanExequial($event: MatSlideToggleChange) {
+    this.isSlideCheckedTienePlanExequial = $event.checked;
+    if (this.isSlideCheckedTienePlanExequial == true) {
+      console.log('seguro plan exequial ' + this.isSlideCheckedTienePlanExequial);
+      this.TienePlanExequial = '1';
+    } else {
+      console.log('seguro plan exequial ' + this.isSlideCheckedTienePlanExequial);
+      this.TienePlanExequial = '0';
     }
   }
    

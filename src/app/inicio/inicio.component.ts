@@ -52,7 +52,7 @@ export class InicioComponent implements OnInit {
        //asigno solo la ruta recortando el http y la pagina actual
        this._dominioCliente = this.dominioRuta[2];
        //envio la ruta recortando el puerto
-       this.consultarDatosCliente('funsanpedroweb.piscotics.com')//this._dominioCliente.replace(":9040","") obedweb.piscotics.com funsanpedroweb.piscotics.com obedweb.piscotics.com this._dominioCliente.replace(":9040","")
+       this.consultarDatosCliente(this._dominioCliente.replace(":9040",""))//this._dominioCliente.replace(":9040","") obedweb.piscotics.com funsanpedroweb.piscotics.com obedweb.piscotics.com this._dominioCliente.replace(":9040","")
 
       //traigo la url actual del usuario 
       console.log('la url actual es  ' + document.location.href);

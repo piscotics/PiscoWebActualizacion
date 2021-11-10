@@ -352,6 +352,8 @@ export class ActualizarTitularComponent implements OnInit {
         Procesado: this.Procesado,
         POSX: this.latitude,
         POSY: this.longitude,
+        TienePlanExequial : '0',
+        EntidadPlanExequial: ''
       };
       console.log('enviara' + JSON.stringify(titulares));
       this.titularesService.setTitular(titulares).subscribe((newTitular) => {

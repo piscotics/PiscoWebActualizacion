@@ -108,6 +108,17 @@
                 <mat-datepicker #myDatePicker></mat-datepicker>  
                 </mat-form-field>
 
+
+                <mat-slide-toggle class="example-full-width" (change)="toggleChangesTienePlanExequial($event)"  >Tiene Plan Exequial</mat-slide-toggle>
+                  
+                <p></p>
+                <p></p>
+
+                <mat-form-field class="example-full-width" *ngIf= "isSlideCheckedTienePlanExequial == true">
+                  <mat-label>Entidad Plan Exequial</mat-label>
+                  <textarea class="mayuscula"  name="entidadplanexequial" matInput placeholder="Ingrese El Nombre De La Entidad"  maxlength="100" [(ngModel)]="EntidadPlanExequial"></textarea>
+                </mat-form-field>
+
                   <mat-form-field class="example-full-width">
                     <mat-label>Observaciones</mat-label>
                     <textarea class="mayuscula"  name="detalle"  matInput placeholder="Ingresa Las Observaciones Que Consideras Respectivas"  maxlength="1000" [(ngModel)]="Detalle" ></textarea>

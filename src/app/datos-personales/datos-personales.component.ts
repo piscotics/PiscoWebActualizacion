@@ -267,6 +267,8 @@ export class DatosPersonalesComponent implements OnInit {
         Procesado: this.Procesado,
         POSX: this.latitude,
         POSY: this.longitude,
+        TienePlanExequial : '0',
+        EntidadPlanExequial: ''
       };
       console.log('enviara' + JSON.stringify(titulares));
       

@@ -37,8 +37,8 @@ const routes: Routes = [
   {path: 'actualizar-beneficiarios/:idBeneficiario', component: ActualizarBeneficiariosComponent},
   
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
-  {path: '404', component: InicioComponent},
-  {path: '**', redirectTo: '/404'}
+  {path: '404',  component: InicioComponent},
+  {path: '**', component: InicioComponent}
   
 
 

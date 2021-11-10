@@ -22,6 +22,8 @@ export interface TitularInterface {
      Procesado : string;
      POSX : string;
      POSY : string;
+     TienePlanExequial : string;
+     EntidadPlanExequial: string;
 
 
 }

@@ -205,7 +205,9 @@ export class AfiliarceComponent implements OnInit {
         Usuario: this.Usuario,
         Procesado: this.Procesado,
         POSX : this.latitude,
-        POSY : this.longitude
+        POSY : this.longitude,
+        TienePlanExequial : '0',
+        EntidadPlanExequial: ''
       };
       console.log('enviara' + JSON.stringify(titulares));
 
