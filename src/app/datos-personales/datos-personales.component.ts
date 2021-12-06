@@ -240,8 +240,8 @@ export class DatosPersonalesComponent implements OnInit {
       this.Direccion !== '' &&
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
-      this.Telefamiliar !== '' &&
-     (this.Email == 'NA' || this.emailFormControl.status == "VALID" ) &&
+      (this.Telefamiliar.length == 10) &&
+     (this.Email == '' || this.emailFormControl.status == "VALID" ) &&
       this.FechaNacimientoDate !== null
     ) {
       const titulares = {
@@ -288,10 +288,19 @@ export class DatosPersonalesComponent implements OnInit {
       });
     } else {
       //enviamos los datos a la modal
-      this.sendModalMensage(
-        'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
-        'Datos Obligatorios'
-      );
+      if(this.Telefamiliar.length < 10){
+        //enviamos los datos a la modal
+       this.sendModalMensage(
+         'Valida Los Datos Del Celular',
+         'Datos Errados'
+       );
+      }else{
+        //enviamos los datos a la modal
+        this.sendModalMensage(
+          'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
+          'Datos Obligatorios'
+        );
+      }
       //mostramos la modal
       this.openDialogMensajes();
     }

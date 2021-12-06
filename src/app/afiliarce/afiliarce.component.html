@@ -88,18 +88,23 @@
                     <mat-label>* Celular</mat-label>
                     <textarea name="celular" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero De celular" maxlength="10"  [(ngModel)]="Telefamiliar"></textarea>
                   </mat-form-field>
+                  
+                  <mat-form-field class="example-full-width">
+                    <mat-label>*Comfirmar Celular</mat-label>
+                    <textarea name="celularcomfirmar" type="number"  (keypress)="onlyNumberKey($event)" matInput  placeholder="Comfirma Tu Numero De celular"  maxlength="10" [(ngModel)]="TelefamiliarComfirmar"></textarea>
+                  </mat-form-field>
 
                   <mat-form-field class="example-full-width">
-                    <mat-label>* Email</mat-label>
+                    <mat-label> Email</mat-label>
                     <textarea name="email" type="email" matInput [formControl]="emailFormControl"   maxlength="150" [errorStateMatcher]="matcher" 
                            placeholder="Ejemplo@example.com"  [(ngModel)]="Email"></textarea>
                   
                     <mat-error *ngIf="emailFormControl.hasError('email')">
                       Ingrese Un Email Valido 
                     </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                  <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
                       Email Es <strong>Requerido</strong>
-                    </mat-error>
+                    </mat-error>--> 
                   </mat-form-field>
                   
                   <mat-form-field class="example-full-width">

@@ -1,0 +1,48 @@
+<html class="html">
+  <div class="main-div">
+      
+       
+        <mat-card  class="form">
+         
+          <picture>
+              
+              <img style="width: 230px; height: 100px;  object-fit: contain;" mat-card-image [src]="logoImage"  alt="">
+            </picture>
+            <p>Inicia Sesion Para Gestionar Los Registros</p>
+            <form class="example-form">
+              
+             
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Usuario</mat-label>
+                <input matInput type="text" name="usuario" placeholder="Ingresa Tu Usuario"   [(ngModel)]="usuario"/>
+
+              
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+               
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" name="password" placeholder="Ingresa Tu Contraseña"   [(ngModel)]="password"/>
+
+              
+              </mat-form-field>
+
+            </form>
+
+           
+
+          <button mat-raised-button class="login-button"  (click)="getUsuario()" > 
+              <mat-icon>people</mat-icon> Iniciar Sesion
+          </button>
+         <p></p>
+          
+
+       </mat-card>
+
+      
+        </div>
+       
+       
+    </html>
+
+    

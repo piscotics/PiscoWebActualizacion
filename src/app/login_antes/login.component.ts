@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   public mensajeModal ="";
   NombreUsuario: string ="";
   public logoImage : string="";
-  public logoImagei : string="";
   public _nitCliente : any;
 
   constructor( private usuarioService : UsuarioService,
@@ -37,8 +36,7 @@ export class LoginComponent implements OnInit {
      
     this.parentMessage ="message from parent";
     this._nitCliente = localStorage.getItem("nitcliente");
-    this.logoImage = 'https://piscotics.com/BannerConsulta/BS' + this._nitCliente + '.jpg';
-    this.logoImagei = 'https://piscotics.com/BannerConsulta/BI' + this._nitCliente + '.jpg';
+    this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
    
     }
 

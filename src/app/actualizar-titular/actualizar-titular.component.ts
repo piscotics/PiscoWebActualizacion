@@ -324,7 +324,7 @@ export class ActualizarTitularComponent implements OnInit {
       
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
-      this.Telefamiliar !== '' &&
+      ( this.Telefamiliar.length == 10) &&
       
       this.FechaNacimientoDate !== null
     ) {
@@ -375,11 +375,19 @@ export class ActualizarTitularComponent implements OnInit {
 
       console.log("los datos a enviar son " + this.emailFormControl.status )
 
-      //enviamos los datos a la modal
-      this.sendModalMensage(
-        'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
-        'Datos Obligatorios'
-      );
+      if(this.Telefamiliar.length < 10){
+        //enviamos los datos a la modal
+       this.sendModalMensage(
+         'Valida Los Datos Del Celular',
+         'Datos Errados'
+       );
+        }else{
+          //enviamos los datos a la modal
+          this.sendModalMensage(
+            'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
+            'Datos Obligatorios'
+          );
+        }
       //mostramos la modal
       this.openDialogMensajes();
     }
