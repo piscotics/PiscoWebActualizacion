@@ -51,6 +51,7 @@ export class ProspectoTitularComponent implements OnInit {
   public isSlideCheckedTieneMascota: boolean = false;
   public isSlideCheckedTieneSeguroM: boolean = false;
   public isSlideCheckedTienePlanExequial: boolean = false;
+  public isSlideCheckedDatosPersonales: boolean = false;
   public titularBd: any = [];
   public resultTitularBd: any = [];
   public departamentosBd: any = [];
@@ -74,6 +75,7 @@ export class ProspectoTitularComponent implements OnInit {
   Barrio: string = '';
   Telefono: string = '';
   Telefamiliar: string = '';
+  TelefamiliarComfirmar: string = '';
   Email: string = '';
   FechaNacimiento: string = '';
   FechaNacimientoDate: Date = new Date();
@@ -81,6 +83,7 @@ export class ProspectoTitularComponent implements OnInit {
   TieneMascota: string = '0';
   TieneSeguro: string = '0';
   TienePlanExequial: string = '0';
+  AutorizoDatosPersonales:  string = '0';
   Detalle: string = '';
   Usuario: string = '';
   latitude : string = '0';
@@ -92,6 +95,7 @@ export class ProspectoTitularComponent implements OnInit {
   seguro : boolean =false;
   planexequial : boolean =false;
   public logoImage : string="";
+  public linkDatosPersonales : string="";
   public _nitCliente : any;
   public registrarprospecto :boolean =false;
   EntidadPlanExequial : string ="";
@@ -110,6 +114,7 @@ export class ProspectoTitularComponent implements OnInit {
     document.body.style.background = 'rgba(214, 214, 214, 0.459)';
     this._nitCliente = localStorage.getItem("nitcliente");
       this.logoImage = 'https://piscotics.com/LogoClientes/L' + this._nitCliente + '.jpg';
+      this.linkDatosPersonales = 'https://www.piscotics.com/PDFClientes/AUTDATOS' + this._nitCliente + '.pdf'
   }
 
   ngOnInit(): void {
@@ -171,7 +176,7 @@ export class ProspectoTitularComponent implements OnInit {
   }
 
   openDialogDatosAlmacendos() {
-    this.dialog.open(DialogDatosPersonalesComponent);
+    this.dialog.open(DialogMensajesComponent);
   }
 
   getAllDepartamentos() {
@@ -244,12 +249,13 @@ export class ProspectoTitularComponent implements OnInit {
       this.Cedula !== '' &&
       this.Nombre1 !== '' &&
       this.Apellido1 !== '' &&
-      this.Direccion !== '' &&
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
       (this.Telefamiliar.length == 10) &&
+      (this.Telefamiliar == this.TelefamiliarComfirmar)&&
       (this.Email == '' || this.emailFormControl.status == "VALID" ) &&
-      this.FechaNacimientoDate !== null 
+      this.FechaNacimientoDate !== null &&
+      this.isSlideCheckedDatosPersonales == true
     ) {
       const titulares = {
         Contrato : this.Contrato,
@@ -288,26 +294,38 @@ export class ProspectoTitularComponent implements OnInit {
 
         //muestra modal que se almaceno correctamente
         if (this.resultTitular == 'Informacion Almacenada Correctamente') {
-          this.openDialogDatosAlmacendos();
+          this.sendModalMensage("Informacion Almacenada Correctamente","Información")
+           //mostramos la modal
+          this.openDialogMensajes();
         }
 
         console.log(this.resultTitular);
       });
     } else {
-
-      if(this.Telefamiliar.length < 10){
-           //enviamos los datos a la modal
-          this.sendModalMensage(
-            'Valida Los Datos Del Celular',
-            'Datos Errados'
-          );
-      }else{
-        //enviamos los datos a la modal
-        this.sendModalMensage(
-          'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
-          'Datos Obligatorios'
-        );
-      }
+        
+        if(this.Telefamiliar.length < 10){
+            //enviamos los datos a la modal
+            this.sendModalMensage(
+              'Valida Los Datos Del Celular',
+              'Datos Errados'
+            );
+        }else{
+          //verifica si el nuemero de celular es correcto
+            if(this.Telefamiliar == this.TelefamiliarComfirmar){
+                //enviamos los datos a la modal
+              this.sendModalMensage(
+                'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
+                'Datos Obligatorios'
+              );
+            }else{
+              //enviamos los datos a la modal
+              this.sendModalMensage(
+                'Valida Los Datos Del Celular',
+                'Datos Errados'
+              );
+            }
+          
+        }
      
       //mostramos la modal
       this.openDialogMensajes();
@@ -345,6 +363,18 @@ export class ProspectoTitularComponent implements OnInit {
     } else {
       console.log('seguro plan exequial ' + this.isSlideCheckedTienePlanExequial);
       this.TienePlanExequial = '0';
+    }
+  }
+
+  
+  toggleChangesDatosPersonales($event: MatSlideToggleChange) {
+    this.isSlideCheckedDatosPersonales = $event.checked;
+    if (this.isSlideCheckedDatosPersonales == true) {
+      console.log('datos personales ' + this.isSlideCheckedDatosPersonales);
+      this.AutorizoDatosPersonales = '1';
+    } else {
+      console.log('datos personales ' + this.isSlideCheckedDatosPersonales);
+      this.AutorizoDatosPersonales = '0';
     }
   }
    

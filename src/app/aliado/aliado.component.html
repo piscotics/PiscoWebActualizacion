@@ -41,7 +41,7 @@
                     </mat-form-field>
   
                     <mat-form-field class="example-full-width">
-                      <mat-label>* Dirección</mat-label>
+                      <mat-label>Dirección</mat-label>
                       <textarea class="mayuscula" name="direccion" matInput placeholder="Ingresa Tu Dirección" maxlength="150"  [(ngModel)]="Direccion"></textarea>
                     </mat-form-field>
                     
@@ -65,19 +65,33 @@
                     </mat-select>
                   </mat-form-field>
                  
-               
-  
+              
                     <mat-form-field class="example-full-width">
                       <mat-label>Barrio</mat-label>
                       
                       <textarea class="mayuscula" name="barrio" matInput placeholder="Ingresa Tu Barrio"  maxlength="60" [(ngModel)]="Barrio"></textarea>
               
                     </mat-form-field>
-  
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Teléfono</mat-label>
-                      <textarea name="telefono" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero Télefono"   maxlength="30" [(ngModel)]="Telefono"></textarea>
+
+                    <mat-form-field appearance="fill" class="example-full-width">
+                      <mat-label>* Impulsador</mat-label>
+                      <mat-select [(ngModel)]="Impulsador" name="impulsadores">
+                        <mat-option *ngFor="let impulsadores of impulsadoresBd" [value]="impulsadores.Dato">
+                          {{impulsadores.Dato}}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
+  
+                    <mat-form-field appearance="fill" class="example-full-width">
+                      <mat-label>* Tipo De Comercio</mat-label>
+                      <mat-select [(ngModel)]="TipoComercio" name="ciudades">
+                        <mat-option *ngFor="let tipocomercios of tipocomerciosBd" [value]="tipocomercios.Dato">
+                          {{tipocomercios.Dato}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    
   
                     <mat-form-field class="example-full-width">
                       <mat-label>* Celular</mat-label>
@@ -85,8 +99,13 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                      <mat-label>*Comfirmar Celular</mat-label>
-                      <textarea name="celularcomfirmar" type="number"  (keypress)="onlyNumberKey($event)" matInput  placeholder="Comfirma Tu Numero De celular"  maxlength="10" [(ngModel)]="TelefamiliarComfirmar"></textarea>
+                      <mat-label>*Confirmar Celular</mat-label>
+                      <textarea name="celularcomfirmar" type="number"  (keypress)="onlyNumberKey($event)" matInput  placeholder="Confirma Tu Numero De celular"  maxlength="10" [(ngModel)]="TelefamiliarComfirmar"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Teléfono</mat-label>
+                      <textarea name="telefono" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero Télefono"   maxlength="30" [(ngModel)]="Telefono"></textarea>
                     </mat-form-field>
   
                     <mat-form-field class="example-full-width">

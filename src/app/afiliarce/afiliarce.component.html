@@ -79,10 +79,7 @@
             
                   </mat-form-field>
 
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Teléfono</mat-label>
-                    <textarea name="telefono" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero Télefono"   maxlength="30" [(ngModel)]="Telefono"></textarea>
-                  </mat-form-field>
+                  
 
                   <mat-form-field class="example-full-width">
                     <mat-label>* Celular</mat-label>
@@ -90,8 +87,13 @@
                   </mat-form-field>
                   
                   <mat-form-field class="example-full-width">
-                    <mat-label>*Comfirmar Celular</mat-label>
-                    <textarea name="celularcomfirmar" type="number"  (keypress)="onlyNumberKey($event)" matInput  placeholder="Comfirma Tu Numero De celular"  maxlength="10" [(ngModel)]="TelefamiliarComfirmar"></textarea>
+                    <mat-label>*Confirmar Celular</mat-label>
+                    <textarea name="celularcomfirmar" type="number"  (keypress)="onlyNumberKey($event)" matInput  placeholder="Confirma Tu Numero De celular"  maxlength="10" [(ngModel)]="TelefamiliarComfirmar"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Teléfono</mat-label>
+                    <textarea name="telefono" type="number"  (keypress)="onlyNumberKey($event)" matInput placeholder="Ingresa Tu Numero Télefono"   maxlength="30" [(ngModel)]="Telefono"></textarea>
                   </mat-form-field>
 
                   <mat-form-field class="example-full-width">

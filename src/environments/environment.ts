@@ -6,7 +6,7 @@
 
 export const environment = {
   production: true,
- //apiEndPoint:"http://localhost:8090/api"
+// apiEndPoint:"http://localhost:8090/api"
    apiEndPoint : "http://sms.piscotics.com:9040/WSPiscoWebActualizacion/api"
 };
 

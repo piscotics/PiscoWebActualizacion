@@ -49,6 +49,7 @@ import { ActualizarBeneficiariosComponent } from './actualizar-beneficiarios/act
 import { ListBeneficiariosModule } from './list-beneficiarios/list-beneficiarios.module';
 import { ActualizarBeneficiariosModule } from './actualizar-beneficiarios/actualizar-beneficiarios.module';
 import { AliadoComponent } from './aliado/aliado.component';
+import { DialogProspectoComponent } from './dialog-prospecto/dialog-prospecto.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AliadoComponent } from './aliado/aliado.component';
     CambiarClaveComponent,
     ListBeneficiariosComponent,
     ActualizarBeneficiariosComponent,
-    AliadoComponent
+    AliadoComponent,
+    DialogProspectoComponent
 
     
   ],

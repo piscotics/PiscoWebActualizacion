@@ -57,6 +57,8 @@ export class AliadoComponent implements OnInit {
   public resultTitular: string = '';
   public encontroTitular: string = '';
   public ciudadesBd: any = [];
+  public impulsadoresBd: any = [];
+  public tipocomerciosBd: any = [];
   public documentoTitular: string = '';
   maxDate = new Date();
   emailFormControl = new FormControl('',[Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),Validators.maxLength(100),
@@ -78,11 +80,14 @@ export class AliadoComponent implements OnInit {
   Barrio: string = '';
   Telefono: string = '';
   Telefamiliar: string = '';
+  TelefamiliarComfirmar: string = '';
   Email: string = '';
   Categoria: string = 'Inactivo';
   Procesado: string = '0';
   latitude : string = '0';
   longitude : string = '0';
+  Impulsador: string ='';
+  TipoComercio : string = '';
   public logoImage : string="";
   public _nitCliente : any;
   public _bdCliente : any;
@@ -91,6 +96,7 @@ export class AliadoComponent implements OnInit {
   constructor(
     private aliadoService: AliadoService,
     private ciudadService: CiudadService,
+    
     private departamentoService: DepartamentoService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -126,6 +132,11 @@ export class AliadoComponent implements OnInit {
    
     //lista los departamentos
     this.getAllDepartamentos();
+
+    //lista los impulsadores
+    this.getAllImpulsadores();
+    //lista los tipos de comercio
+   this.getAllTipoComercio();
   }
   //se utiliza para traer la ubicacion
   getLocation() {
@@ -155,6 +166,22 @@ export class AliadoComponent implements OnInit {
       console.log(ciudades);
     });
   }
+
+  getAllImpulsadores() {
+    this.aliadoService.getAllImpulsadores().subscribe((impulsadores) => {
+      this.impulsadoresBd = impulsadores;
+     
+      console.log(impulsadores);
+    });
+  }
+
+  getAllTipoComercio() {
+    this.aliadoService.getAllTipoComercio().subscribe((tipocomercios) => {
+      this.tipocomerciosBd = tipocomercios;
+    
+      console.log(tipocomercios);
+    });
+  }
   openDialogMensajes() {
     this.dialog.open(DialogMensajesComponent);
   }
@@ -169,12 +196,14 @@ export class AliadoComponent implements OnInit {
       this.Cedula !== '' &&
       this.Nombre1 !== '' &&
       this.Apellido1 !== '' &&
-      this.Direccion !== '' &&
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
       ( this.Telefamiliar.length == 10) &&
+      (this.Telefamiliar == this.TelefamiliarComfirmar)&&
       (this.Email == '' || this.emailFormControl.status == "VALID" ) &&
-      this.Categoria !== '' 
+      this.Categoria !== '' &&
+      this.Impulsador!== '' &&
+      this.TipoComercio !== '' 
     ) {
       const aliados = {
         Cedula: this.Cedula,
@@ -192,7 +221,9 @@ export class AliadoComponent implements OnInit {
         Procesado: this.Procesado,
         POSX : this.latitude,
         POSY : this.longitude,
-        Categoria: this.Categoria
+        Categoria: this.Categoria,
+        Impulsador: this.Impulsador,
+        TipoComercio: this.TipoComercio
       };
       console.log('enviara' + JSON.stringify(aliados));
 
@@ -214,7 +245,16 @@ export class AliadoComponent implements OnInit {
       });
     } else {
       console.log("el email dice",this.emailFormControl.status == "INVALID")
-
+      //verifica si el nuemero de celular es correcto
+      if(this.Telefamiliar == this.TelefamiliarComfirmar){
+         
+      }else{
+         //enviamos los datos a la modal
+         this.sendModalMensage(
+          'Valida Los Datos Del Celular',
+          'Datos Errados'
+        );
+      }
       if(this.Telefamiliar.length < 10){
         //enviamos los datos a la modal
        this.sendModalMensage(
@@ -223,10 +263,19 @@ export class AliadoComponent implements OnInit {
        );
       }else{
         //enviamos los datos a la modal
-        this.sendModalMensage(
-          'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
-          'Datos Obligatorios'
-        );
+        if(this.Telefamiliar == this.TelefamiliarComfirmar){
+          //enviamos los datos a la modal
+            this.sendModalMensage(
+              'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
+              'Datos Obligatorios'
+            );
+          }else{
+            //enviamos los datos a la modal
+            this.sendModalMensage(
+              'Valida Los Datos Del Celular',
+              'Datos Errados'
+            );
+          }
       }
       //mostramos la modal
       this.openDialogMensajes();

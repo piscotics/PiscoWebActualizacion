@@ -81,6 +81,7 @@ export class ActualizarTitularComponent implements OnInit {
   Barrio: string = '';
   Telefono: string = '';
   Telefamiliar: string = '';
+  TelefamiliarComfirmar: string = '';
   Email: string = '';
   FechaNacimiento: string = '';
   FechaNacimientoDate: Date = new Date();
@@ -325,7 +326,7 @@ export class ActualizarTitularComponent implements OnInit {
       this.Departamento !== '' &&
       this.Ciudad !== '' &&
       ( this.Telefamiliar.length == 10) &&
-      
+      (this.Telefamiliar == this.TelefamiliarComfirmar)&&
       this.FechaNacimientoDate !== null
     ) {
 
@@ -373,20 +374,39 @@ export class ActualizarTitularComponent implements OnInit {
       });
     } else {
 
-      console.log("los datos a enviar son " + this.emailFormControl.status )
-
-      if(this.Telefamiliar.length < 10){
+      console.log("Telefamiliar son " + this.Telefamiliar )
+      console.log("TelefamiliarComfirmar son " + this.TelefamiliarComfirmar )
+      //verifica si el nuemero de celular es correcto
+        if(this.Telefamiliar == this.TelefamiliarComfirmar){
+         
+        }else{
+           //enviamos los datos a la modal
+           this.sendModalMensage(
+            'Valida Los Datos Del Celular',
+            'Datos Errados'
+          );
+        }
+        if(this.Telefamiliar.length < 10){
         //enviamos los datos a la modal
-       this.sendModalMensage(
-         'Valida Los Datos Del Celular',
-         'Datos Errados'
-       );
+          this.sendModalMensage(
+            'Valida Los Datos Del Celular',
+            'Datos Errados'
+          );
         }else{
           //enviamos los datos a la modal
-          this.sendModalMensage(
-            'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
-            'Datos Obligatorios'
-          );
+          if(this.Telefamiliar == this.TelefamiliarComfirmar){
+            //enviamos los datos a la modal
+              this.sendModalMensage(
+                'Ingresa Los Datos Obligatorios(*) Para Enviar la Información',
+                'Datos Obligatorios'
+              );
+            }else{
+              //enviamos los datos a la modal
+              this.sendModalMensage(
+                'Valida Los Datos Del Celular',
+                'Datos Errados'
+              );
+            }
         }
       //mostramos la modal
       this.openDialogMensajes();
