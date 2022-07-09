@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { BeneficiariosInterface } from '../interfaces/beneficiarios';
+import { HttpClientModule, HttpClient, HttpHeaders } from "@angular/common/http";
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +24,23 @@ export class BeneficiariosService {
     return this.http.get<BeneficiariosInterface>(path); 
   }
 
-  getBeneficiario(document: string) {
-    throw new Error('Method not implemented.');
+  getBeneficiario(documentoTitular: string) {
+    this._rutaBd= localStorage.getItem("rutaBd");
+    console.log("la ruta de la bd es: " + this._rutaBd)
+      const path = `${this.apiEndPoint}/Titulares/GetBeneficiario?Cedula=${documentoTitular}&rutaBd=${this._rutaBd}`;
+      console.log(path);
+      return this.http.get<BeneficiariosInterface>(path); 
   }
 
+  setBeneficiario(beneficiariosInterface: BeneficiariosInterface) {
+    this._rutaBd= localStorage.getItem("rutaBd");
+      console.log("la ruta de la bd es: " + this._rutaBd)
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    console.log('llego' + beneficiariosInterface)
+    const path = `${this.apiEndPoint}/Titulares/SetBeneficiarios?rutaBd=${this._rutaBd}`;
+    return this.http.post(path, beneficiariosInterface);
+  }
 
 }
